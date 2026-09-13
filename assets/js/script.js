@@ -849,7 +849,7 @@ document.addEventListener("DOMContentLoaded", () => {
   /* Inicializa a injeção e o funcionamento do carrossel */
   if (typeof initDepoimentosCarousel === "function") {
     initDepoimentosCarousel(); 
-  }
+  } 
 
   initParallax();
 });
