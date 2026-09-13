@@ -8,6 +8,14 @@
   <meta name="description"
     content="Dois chalés exclusivos com hidromassagem, lareira, cozinha equipada e vista do pôr do sol. Ideal para casais que buscam uma estadia única em meio à natureza." />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <!-- Preload fontes críticas -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style"
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&display=swap" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&display=swap" />
+  <meta name="theme-color" content="#faf7f2" />
   <link rel="stylesheet" href="assets/style/styles.css" />
 </head>
 
@@ -51,7 +59,7 @@
   <!-- HERO -->
   <section id="topo" class="hero">
     <div class="hero-media">
-      <img src="assets/img/Depoimentos/hall.png"
+      <img src="assets/img/externo/hall.webp"
         alt="Vista do pôr do sol dourado a partir dos chalés Recanto do Sol em Colombo" class="hero-img" />
       <div class="hero-overlay"></div>
     </div>
@@ -112,18 +120,18 @@
   <section id="historia" class="section">
     <div class="container historia-grid">
       <div class="historia-images">
-        <div class="hist-img-main">
-          <img src="assets/img/varanda-balanco.jpg" alt="Balanço suspenso na varanda de madeira ao entardecer"
+        <div class="hist-img-main" data-reveal="left">
+          <img src="assets/img/externo/varanda-balanco.webp" alt="Balanço suspenso na varanda de madeira ao entardecer"
             loading="lazy" />
         </div>
-        <div class="hist-img-secondary">
-          <img src="assets/img/Externo/lago3.jpg" alt="Lago ornamental com jardim de pedras naturais" loading="lazy" />
-          <img src="assets/img/placas.png"
+        <div class="hist-img-secondary" data-reveal="right" data-delay="1">
+          <img src="assets/img/externo/lago3.jpg" alt="Lago ornamental com jardim de pedras naturais" loading="lazy" />
+          <img src="assets/img/externo/placas.webp"
             alt="Placa com frase: Neste lugar somos verdadeiros, nos divertimos, rimos, discordamos" loading="lazy"
             class="hist-img-signs" />
         </div>
       </div>
-      <div class="historia-text">
+      <div class="historia-text" data-reveal="right">
         <span class="eyebrow">Nossa história</span>
         <h2>Um paraíso no alto do morro, feito para momentos inesquecíveis</h2>
         <p>Nossa chácara fica em um canto especial da natureza, onde o céu se encontra com a terra e o sol se despede em
@@ -140,7 +148,7 @@
   <!-- CHALÉS -->
   <section id="chales" class="section section-sand">
     <div class="container">
-      <div class="section-header">
+      <div class="section-header" data-reveal="up">
         <span class="eyebrow">Nossos chalés</span>
         <h2>Escolha o seu refúgio</h2>
         <p class="section-sub">Ambos acomodam um casal com até duas crianças. Roupas de cama e banho inclusas.</p>
@@ -152,21 +160,21 @@
   <!-- ÁREA EXTERNA -->
   <section id="area-externa" class="section section-forest">
     <div class="container">
-      <div class="section-header light">
+      <div class="section-header light" data-reveal="up">
         <span class="eyebrow eyebrow-light">Área externa</span>
         <h2>A chácara inteira é sua</h2>
         <p class="section-sub soft">Além do conforto dentro do chalé, os hóspedes têm lazer completo ao ar livre.</p>
       </div>
       <div class="ext-grid">
-        <div class="ext-photos">
-          <img src="assets/img/Externo/Fogueira.png" alt="Fogueira acesa com pedras ao redor ao anoitecer"
+        <div class="ext-photos" data-reveal="left">
+          <img src="assets/img/externo/Fogueira.webp" alt="Fogueira acesa com pedras ao redor ao anoitecer"
             loading="lazy" class="ext-photo-main" />
-          <img src="assets/img/Externo/por-do-sol.png" alt="Espaço kids com casa na árvore e balanços" loading="lazy"
+          <img src="assets/img/externo/por-do-sol.webp" alt="Espaço kids com casa na árvore e balanços" loading="lazy"
             class="ext-photo-sec" />
-          <img src="assets/img/Externo/kids.jpg" alt="Espaço kids com casa na árvore e balanços" loading="lazy"
+          <img src="assets/img/externo/kids.jpg" alt="Espaço kids com casa na árvore e balanços" loading="lazy"
             class="ext-photo-sec" />
         </div>
-        <ul class="ext-features">
+        <ul class="ext-features" data-reveal="right">
           <li>
             <div class="ext-icon">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
@@ -243,20 +251,20 @@
   <!-- SERVIÇOS -->
   <section id="servicos" class="section">
     <div class="container">
-      <div class="servicos-header">
+      <div class="servicos-header" data-reveal="up">
         <div>
           <span class="eyebrow">Serviços e facilidades</span>
           <h2>Tudo pronto na sua chegada</h2>
           <p class="muted">Mimos e serviços disponíveis para os dois chalés. Solicite com antecedência.</p>
         </div>
         <div class="servicos-photos">
-          <img src="assets/img/serviços/tabua-frios.png" alt="Cesta de café da manhã farta servida no chalé"
+          <img src="assets/img/servicos/tabua-frios.webp" alt="Cesta de café da manhã farta servida no chalé"
             loading="lazy" />
-          <img src="assets/img/serviços/cafe-manha4.jpg" alt="Tábua de frios com queijos, charcutaria e frutas"
+          <img src="assets/img/servicos/cafe-manha4.webp" alt="Tábua de frios com queijos, charcutaria e frutas"
             loading="lazy" />
         </div>
       </div>
-      <ul class="servicos-grid">
+      <ul class="servicos-grid" data-reveal="up" data-delay="1">
         <li class="servico-card">
           <div class="servico-header">
             <h3>Cesta de café da manhã</h3>
@@ -306,10 +314,10 @@
 
   <!-- DEPOIMENTOS -->
   <section class="depoimentos container" id="depoimentos">
-    <div class="depoimentos-header servicos-header">
+    <div class="depoimentos-header servicos-header" data-reveal="up">
       <div class="depoimento-photos">
-        <img src="assets/img/Externo/cabana.png" alt="Chalé Recanto do Bosque entre os pinheiros" loading="lazy" />
-        <img src="assets/img/depoimento-banheira.jpg" alt="Banheira de hidromassagem com ambiente romântico"
+        <img src="assets/img/depoimentos/pessoas-fogueira.webp" alt="Chalé Recanto do Bosque entre os pinheiros" loading="lazy" />
+        <img src="assets/img/depoimentos/Banheira.jpg" alt="Banheira de hidromassagem com ambiente romântico"
           loading="lazy" />
       </div>
       <div>
@@ -331,7 +339,7 @@
   <!-- RESERVAS -->
   <section id="reservas" class="section section-sand">
     <div class="container reservas-grid">
-      <div class="reservas-info">
+      <div class="reservas-info" data-reveal="left">
         <span class="eyebrow">Política de reservas</span>
         <h2>Simples e sem burocracia</h2>
         <p class="muted">Para garantir sua reserva, solicitamos um depósito de 30% do valor total no momento da
@@ -360,7 +368,7 @@
           Check-in a partir das 14h · Check-out até 16h
         </p>
       </div>
-      <div class="reservas-cta">
+      <div class="reservas-cta" data-reveal="right">
         <h3>Consulte a disponibilidade</h3>
         <p>Fins de semana e feriados costumam esgotar rapidamente. Fale com a gente pelo WhatsApp e garanta suas datas.
         </p>
@@ -391,7 +399,7 @@
   <footer>
     <div class="footer-inner">
       <div class="footer-brand">
-        <img src="assets/img/SuaLogo.png" alt="Logo">
+        <img src="assets/img/logo.webp" alt="Logo">
         <p>Chalés no alto do morro para casais que querem descansar, com hidromassagem, lareira e vista para o pôr do
           sol.</p>
         <div class="social-links">
@@ -588,8 +596,9 @@
       </div>
     </div>
   </div>
-
+  
   <script src="assets/js/script.js"></script>
+  <script src="assets/js/animations.js"></script>
 </body>
 
 </html>

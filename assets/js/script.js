@@ -3,6 +3,44 @@
    Troque os dados abaixo pelos reais antes de publicar.
    ============================================================ */
 
+
+   /* ============================================================
+   Lenis - Scroll Suave com Inércia
+   ============================================================ */
+function initSmoothScroll() {
+  // Inicializa o motor com as configurações de peso e inércia
+  const lenis = new Lenis({
+    duration: 1.2,       // Quão demorado é o arrasto
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Curva matemática da suavidade
+    direction: 'vertical', 
+    gestureDirection: 'vertical',
+    smooth: true,
+    mouseMultiplier: 1,  // Força do mouse wheel
+    smoothTouch: false,  // O ideal é falso para não estragar a sensação tátil natural do celular
+    touchMultiplier: 2,
+    infinite: false,
+  });
+
+  // Conecta o motor de física do Lenis ao Animation Frame do navegador (60fps)
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+  requestAnimationFrame(raf);
+  
+  // (OPCIONAL) Faz com que seus links com âncoras (href="#historia") deslizem suavemente usando a física do Lenis
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener('click', (e) => {
+      const id = anchor.getAttribute('href');
+      if (id !== '#') {
+        e.preventDefault();
+        // O offset subtrai a altura do header fixo (ex: 80px)
+        lenis.scrollTo(id, { offset: -80 }); 
+      }
+    });
+  });
+}
+
 const CONFIG = {
   whatsapp: "5541998023653",
   instagram: "https://www.instagram.com/recanto_sol_colombo/",
@@ -49,13 +87,16 @@ const CHALES = [
       "Cama queen com massagem e ar-condicionado — roupas de cama e banho inclusas",
     precos: { semana: 650, fimSemana: 850, pacote: 1300 },
     galeria: [
-      { src: "assets/img/sol-exterior-dia.jpg",       alt: "Fachada do Chalé Pôr do Sol ao meio-dia" },
-      { src: "assets/img/sol-foto1.jpg",              alt: "Varanda privativa do Chalé Pôr do Sol" },
-      { src: "assets/img/sol-sala.jpg",               alt: "Sala aconchegante com TV a cabo e lareira a lenha" },
-      { src: "assets/img/sol-hidro.jpg",              alt: "Hidromassagem privativa com pétalas de rosas" },
-      { src: "assets/img/sol-quarto-romantico.jpg",   alt: "Cama queen com decoração romântica e iluminação suave" },
-      { src: "assets/img/sol-foto2.jpg",              alt: "Ambiente interno iluminado do chalé" },
-      { src: "assets/img/sol-exterior-noite.jpg",     alt: "Chalé Pôr do Sol iluminado ao anoitecer" },
+      { src: "assets/img/sol/drone2.webp",       alt: "Fachada do Chalé Pôr do Sol ao meio-dia" },
+      { src: "assets/img/sol/sol-exterior-noite.webp",     alt: "Chalé Pôr do Sol iluminado ao anoitecer" },
+      { src: "assets/img/sol/sala.webp",     alt: "Chalé Pôr do Sol iluminado ao anoitecer" },
+      { src: "assets/img/sol/tv.webp",     alt: "Chalé Pôr do Sol iluminado ao anoitecer" },
+      { src: "assets/img/sol/cozinha.webp",     alt: "Chalé Pôr do Sol iluminado ao anoitecer" },
+      { src: "assets/img/sol/banheira.webp",     alt: "Chalé Pôr do Sol iluminado ao anoitecer" },
+      { src: "assets/img/sol/banheira2.webp",     alt: "Chalé Pôr do Sol iluminado ao anoitecer" },
+      { src: "assets/img/sol/vista2-andar.webp",     alt: "Chalé Pôr do Sol iluminado ao anoitecer" },
+      { src: "assets/img/sol/cama-decorada.webp",     alt: "Chalé Pôr do Sol iluminado ao anoitecer" },
+      { src: "assets/img/sol/vista-cama.webp",     alt: "Chalé Pôr do Sol iluminado ao anoitecer" }
     ],
   },
   {
@@ -80,13 +121,16 @@ const CHALES = [
       "Cama de casal, ar-condicionado, TV a cabo e sacada — roupas de cama e banho inclusas",
     precos: { semana: 500, fimSemana: 700, pacote: 1100 },
     galeria: [
-      { src: "assets/img/bosque-exterior-dia.jpg",  alt: "Chalé Recanto do Bosque entre os pinheiros — vista frontal" },
-      { src: "assets/img/bosque-sacada.jpg",         alt: "Vista da sacada do Chalé Recanto do Bosque com céu aberto" },
-      { src: "assets/img/bosque-hidro.jpg",          alt: "Banheira de hidromassagem na sacada com vista para a mata" },
-      { src: "assets/img/bosque-foto1.jpg",          alt: "Interior do chalé — ambiente aconchegante e bem iluminado" },
-      { src: "assets/img/bosque-sala.jpg",           alt: "Sala do chalé com poltrona e vista para a sacada" },
-      { src: "assets/img/bosque-cozinha.jpg",        alt: "Cozinha completa equipada com mesa de refeições" },
-      { src: "assets/img/bosque-exterior-noite.jpg", alt: "Chalé Recanto do Bosque iluminado ao entardecer" },
+      { src: "assets/img/bosque/bosque-exterior-dia.webp",  alt: "Chalé Recanto do Bosque entre os pinheiros — vista frontal" },
+      { src: "assets/img/bosque/bosque-exterior-noite.webp",  alt: "Chalé Recanto do Bosque entre os pinheiros — vista frontal" },
+      { src: "assets/img/bosque/sala.webp",  alt: "Chalé Recanto do Bosque entre os pinheiros — vista frontal" },
+      { src: "assets/img/bosque/sala2.webp",  alt: "Chalé Recanto do Bosque entre os pinheiros — vista frontal" },
+      { src: "assets/img/bosque/cozinha.webp",  alt: "Chalé Recanto do Bosque entre os pinheiros — vista frontal" },
+      { src: "assets/img/bosque/cozinha-ampla.webp",  alt: "Chalé Recanto do Bosque entre os pinheiros — vista frontal" },
+      { src: "assets/img/bosque/banheira.jpg",  alt: "Chalé Recanto do Bosque entre os pinheiros — vista frontal" },
+      { src: "assets/img/bosque/cama-decorada.webp",  alt: "Chalé Recanto do Bosque entre os pinheiros — vista frontal" },
+      { src: "assets/img/bosque/rede-suspensa.webp",  alt: "Chalé Recanto do Bosque entre os pinheiros — vista frontal" },
+      { src: "assets/img/bosque/drone.webp",  alt: "Chalé Recanto do Bosque entre os pinheiros — vista frontal" },
     ],
   },
 ];
@@ -800,6 +844,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initLinks();
   initActiveNav();
   initModal();
+  
   
   /* Inicializa a injeção e o funcionamento do carrossel */
   if (typeof initDepoimentosCarousel === "function") {

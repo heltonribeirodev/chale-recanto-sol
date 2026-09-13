@@ -19,7 +19,7 @@
   --radius-lg: 28px;
   --shadow: 0 2px 12px rgba(42,32,24,.06), 0 16px 40px -20px rgba(42,32,24,.25);
   --shadow-lg: 0 8px 40px rgba(42,32,24,.18);
-  --transition: .22s cubic-bezier(.4,0,.2,1);
+  --transition: .5s cubic-bezier(.4,0,.2,1);
 }
 
 /* ----- Reset ----- */
@@ -29,7 +29,31 @@ a { color: inherit; text-decoration: none; }
 ul { list-style: none; }
 
 /* ----- Base ----- */
-html { scroll-behavior: smooth; }
+html { 
+  scroll-behavior: smooth; 
+  scroll-padding-top: 72px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold-light) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg); /* Usa o fundo off-white do site */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--gold-light); /* Tom dourado principal */
+  border-radius: 99px; /* Arredondamento elegante */
+  border: 2px solid var(--bg); /* Cria uma margem interna invisível para a barra parecer mais fina */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--gold); /* Dourado mais escuro ao passar o mouse */
+}
+
 body {
   background: var(--bg);
   color: var(--fg);
@@ -1718,4 +1742,195 @@ footer {
     gap: 14px; /* Ajuste: Cria o espaçamento vertical entre os botões */
   }
   .reservas-links .btn { width: 100%; }
+}
+
+
+/* ============================================================
+   ANIMAÇÕES & SCROLL SUAVE — Recanto do Sol
+   ============================================================ */
+
+/* ----- Scroll suave nativo reforçado ----- */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 72px; /* compensa o nav sticky */
+}
+
+/* ----- Tokens de animação ----- */
+:root {
+  --ease-out-expo: cubic-bezier(.16, 1, .3, 1);
+  --ease-out-back: cubic-bezier(.34, 1.56, .64, 1);
+  --dur-fast  : .35s;
+  --dur-normal: .55s;
+  --dur-slow  : .8s;
+}
+
+/* ── Animações @keyframes ───────────────────────────────────── */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes fade-left {
+  from { opacity: 0; transform: translateX(-40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes fade-right {
+  from { opacity: 0; transform: translateX(40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(.92); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes slide-down {
+  from { opacity: 0; transform: translateY(-20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Hero: animação de entrada automática ───────────────────── */
+.hero-eyebrow { animation: fade-up var(--dur-normal) var(--ease-out-expo) .1s both; }
+.hero-title   { animation: fade-up var(--dur-slow)   var(--ease-out-expo) .25s both; }
+.hero-subtitle{ animation: fade-up var(--dur-slow)   var(--ease-out-expo) .4s both; }
+.hero-actions { animation: fade-up var(--dur-normal) var(--ease-out-expo) .55s both; }
+.hero-scroll  { animation: fade-in var(--dur-slow)   ease               1.2s both; }
+.highlights-bar { animation: slide-down var(--dur-normal) var(--ease-out-expo) .7s both; }
+
+/* ── Utilitários de reveal (controlados pelo JS/IntersectionObserver) ── */
+
+/* Estado inicial: invisível, pronto para animar */
+[data-reveal] {
+  opacity: 0;
+  will-change: opacity, transform;
+}
+[data-reveal="up"]    { transform: translateY(36px); }
+[data-reveal="left"]  { transform: translateX(-40px); }
+[data-reveal="right"] { transform: translateX(40px); }
+[data-reveal="scale"] { transform: scale(.94); }
+[data-reveal="fade"]  { transform: none; }
+
+/* Estado visível — adicionado pela classe .revealed */
+[data-reveal].revealed {
+  animation: none; /* evita conflito com keyframes nominais */
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity   var(--dur-normal) var(--ease-out-expo),
+    transform var(--dur-normal) var(--ease-out-expo);
+}
+
+/* Delay escalonado para grupos de elementos (stagger) */
+[data-reveal][data-delay="1"] { transition-delay: .08s; }
+[data-reveal][data-delay="2"] { transition-delay: .16s; }
+[data-reveal][data-delay="3"] { transition-delay: .24s; }
+[data-reveal][data-delay="4"] { transition-delay: .32s; }
+[data-reveal][data-delay="5"] { transition-delay: .40s; }
+[data-reveal][data-delay="6"] { transition-delay: .48s; }
+
+/* ── Nav: transição de entrada ao carregar ─────────────────── */
+.nav-bar { animation: slide-down var(--dur-normal) var(--ease-out-expo) both; }
+
+/* ── Chalé card: efeito nos botões de thumb ────────────────── */
+.chale-thumb img {
+  transition: transform .4s var(--ease-out-expo);
+}
+.chale-thumb:hover img { transform: scale(1.08); }
+
+/* ── Imagem principal do chalé: transição suave ao trocar foto ── */
+.chale-main-img {
+  transition: opacity .3s ease, transform .5s var(--ease-out-expo);
+}
+.chale-main-img.is-switching {
+  opacity: 0;
+  transform: scale(1.03);
+}
+
+/* ── Serviço cards: hover lift ─────────────────────────────── */
+.servico-card {
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition);
+}
+.servico-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ── Depoimentos: hover suave ──────────────────────────────── */
+.depoimento-card {
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.depoimento-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ── Highlights bar: ícones com pulse sutil ────────────────── */
+@keyframes icon-pulse {
+  0%,100% { transform: scale(1); }
+  50%      { transform: scale(1.18); }
+}
+.highlights-list li:hover svg {
+  animation: icon-pulse .5s var(--ease-out-back);
+}
+
+/* ── Ext-features: hover nos ícones da área externa ────────── */
+.ext-icon {
+  transition: transform var(--transition), background var(--transition);
+}
+.ext-features li:hover .ext-icon {
+  transform: scale(1.12) rotate(-3deg);
+}
+
+/* ── Botões: feedback visual aprimorado ────────────────────── */
+.btn {
+  transition:
+    transform var(--dur-fast) var(--ease-out-back),
+    box-shadow var(--transition),
+    opacity    var(--transition),
+    background var(--transition);
+}
+.btn:active { transform: scale(.97) translateY(1px) !important; }
+
+/* ── FAB WhatsApp: pulso de atenção ────────────────────────── */
+@keyframes fab-pulse {
+  0%  { box-shadow: 0 0 0 0 rgba(31,174,86,.5); }
+  70% { box-shadow: 0 0 0 16px rgba(31,174,86,0); }
+  100%{ box-shadow: 0 0 0 0 rgba(31,174,86,0); }
+}
+.fab-whats { animation: fab-pulse 2.8s ease-out 3s infinite; }
+
+/* ── Scroll indicator do hero: bounce ──────────────────────── */
+@keyframes scroll-bounce {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(6px); }
+}
+.hero-scroll { animation: fade-in 1s ease 1.2s both, scroll-bounce 1.8s ease 2s infinite; }
+.scroll-dot  { animation: scroll-bounce 1.8s ease 2s infinite; }
+
+/* ── Image lazy load: fade in ao carregar ──────────────────── */
+img { transition: opacity .4s ease; }
+img.lazy-hidden { opacity: 0; }
+img.lazy-loaded { opacity: 1; }
+
+/* ── Seção historia: parallax leve nas imagens ─────────────── */
+.hist-img-main img,
+.hist-img-secondary img {
+  transition: transform .6s var(--ease-out-expo);
+  overflow: hidden;
+}
+.hist-img-main:hover img { transform: scale(1.03); }
+
+/* ── Reduce motion: desativa animações para quem prefere ────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
