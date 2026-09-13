@@ -148,13 +148,16 @@ p { max-width: 60ch; }
 }
 .btn-outline-dark:hover { border-color: var(--gold); }
 
-/* ----- Navigation ----- */
+/* ----- Navigation (Versão Otimizada) ----- */
 .nav-bar {
   position: sticky;
   top: 0;
   z-index: 100;
+  -webkit-transform: translateZ(0); /* fix iOS sticky + GPU compositing */
+  transform: translateZ(0);
   background: rgba(250,247,242,.92);
   backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px); /* Suporte essencial para Safari/iPhone */
   border-bottom: 1px solid transparent;
   transition: border-color var(--transition), background var(--transition);
 }
@@ -200,6 +203,7 @@ p { max-width: 60ch; }
 
 @media (min-width: 900px) { .nav-links { display: flex; } }
 
+/* Botão Hamburguer blindado para toque */
 .nav-toggle {
   display: flex;
   flex-direction: column;
@@ -207,7 +211,11 @@ p { max-width: 60ch; }
   background: none;
   border: none;
   cursor: pointer;
-  padding: 6px;
+  padding: 12px; /* Área de toque (Touch Target) aumentada para dedos */
+  margin-right: -12px; /* Compensa o padding para manter alinhado à direita */
+  touch-action: manipulation; /* Remove o atraso de 300ms do clique no mobile */
+  position: relative;
+  z-index: 10000;
 }
 .nav-toggle span {
   display: block;
@@ -223,6 +231,7 @@ p { max-width: 60ch; }
 
 @media (min-width: 900px) { .nav-toggle { display: none; } }
 
+/* Menu Flutuante */
 .mobile-menu {
   display: none;
   flex-direction: column;
@@ -230,8 +239,14 @@ p { max-width: 60ch; }
   padding: 20px 24px 24px;
   border-top: 1px solid var(--border);
   background: var(--bg);
+  position: absolute; /* Menu agora flutua por cima da página ao invés de empurrá-la */
+  top: 100%;
+  left: 0;
+  width: 100%;
+  box-shadow: 0 16px 32px rgba(0,0,0,0.08);
 }
 .mobile-menu.open { display: flex; }
+
 .mobile-menu nav { display: flex; flex-direction: column; gap: 16px; }
 .mobile-menu a { font-size: 1.05rem; color: var(--fg-muted); }
 .mobile-menu nav a { transition: color var(--transition); }
@@ -239,6 +254,8 @@ p { max-width: 60ch; }
 
 .nav-cta { display: none; }
 @media (min-width: 640px) { .nav-cta { display: inline-flex; } }
+
+
 
 /* ----- Hero ----- */
 .hero {
@@ -450,11 +467,15 @@ p { max-width: 60ch; }
 
 .chale-photo-wrap {
   position: relative;
-  flex: 1;
-  height: 22rem; /* Substitui o antigo min-height por um height estrito no mobile */
+  flex: none; /* CRUCIAL: Impede que o flexbox ignore a altura fixa no celular */
+  width: 100%;
+  height: 22rem; 
 }
 
 .chale-photo-wrap img {
+  position: absolute; /* CRUCIAL: A imagem para de ditar a altura do card */
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -463,19 +484,12 @@ p { max-width: 60ch; }
 
 @media (min-width: 900px) {
   .chale-media {
-    height: 100%; /* Força a coluna da esquerda a espelhar a altura da coluna da direita (texto) */
+    height: 100%; 
   }
   
   .chale-photo-wrap {
-    height: 100%; /* Estica o container até as thumbnails */
-  }
-
-  .chale-photo-wrap img {
-    position: absolute; /* A chave do ajuste: remove a imagem do cálculo de altura do card */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    height: auto; /* Libera a altura engessada herdada do mobile */
+    flex: 1; /* Mágica do Flexbox: a foto principal preenche exatamente o espaço que sobrar acima das miniaturas */
   }
 }
 

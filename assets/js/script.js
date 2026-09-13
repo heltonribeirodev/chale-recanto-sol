@@ -644,23 +644,7 @@ function initModal() {
 }
 
 /* ---- Entry point ---- */
-document.addEventListener("DOMContentLoaded", () => {
-  /* Render chalés */
-  const lista = document.getElementById("lista-chales");
-  if (lista) {
-    CHALES.forEach((chale, i) => lista.appendChild(criarCardChale(chale, i)));
-  }
 
-  /* Year in footer */
-  const anoEl = document.getElementById("ano");
-  if (anoEl) anoEl.textContent = new Date().getFullYear();
-
-  initNavScroll();
-  initMobileMenu();
-  initLinks();
-  initActiveNav();
-  initModal();
-});
 
 
 
@@ -774,7 +758,7 @@ function initDepoimentosCarousel() {
   }
 
   function startAutoPlay() {
-    autoPlayInterval = setInterval(nextSlide, 5000); // Rotação a cada 5 segundos
+    autoPlayInterval = setInterval(nextSlide, 3000); // Rotação a cada 3 segundos
   }
 
   function resetAutoPlay() {
