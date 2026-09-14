@@ -52,6 +52,11 @@ html {
   scroll-padding-top: 72px;
   scrollbar-width: thin;
   scrollbar-color: var(--gold-light) transparent;
+  
+  /* CRUCIAL: Trava o eixo horizontal globalmente na raiz */
+  overflow-x: hidden;
+  width: 100vw;
+  max-width: 100%;
 }
 
 ::-webkit-scrollbar {
@@ -77,6 +82,17 @@ html {
   /* Dourado mais escuro ao passar o mouse */
 }
 
+@media (max-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 0px; 
+    background: transparent; 
+  }
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
 body {
   background: var(--bg);
   color: var(--fg);
@@ -84,6 +100,8 @@ body {
   font-size: 1rem;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
+  
+  /* Mantém o overflow-x hidden no body por segurança redobrada */
   overflow-x: hidden;
 }
 
