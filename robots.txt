@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /assets/js/
+
+Sitemap: https://chalerecantodosol.com.br/sitemap.xml

@@ -15,7 +15,8 @@
 
 header('Content-Type: application/json; charset=utf-8');
 header('Access-Control-Allow-Origin: *');
-header('Cache-Control: public, max-age=3600'); // cache de 1h
+header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+header('Pragma: no-cache');
 
 // ── Configuração dos Chalés ──────────────────────────────────────────────────
 //
@@ -32,14 +33,11 @@ header('Cache-Control: public, max-age=3600'); // cache de 1h
 $CHALES = [
     'sol' => [
         'nome'     => 'Chalé Pôr do Sol',
-        // Cole seu link iCal do Airbnb abaixo (substitui as datas manuais automaticamente):
-        'ical_url' => '',
-        // Exemplo de teste com feriados BR como "indisponíveis":
-        // 'ical_url' => 'https://calendar.google.com/calendar/ical/en.brazilian%23holiday%40group.v.calendar.google.com/public/basic.ics',
+        'ical_url' => 'https://www.airbnb.com/calendar/ical/1277477003441238955.ics?t=7c057740bdbc41acb371c22e99a2209a&locale=pt',
     ],
     'bosque' => [
         'nome'     => 'Chalé Recanto do Bosque',
-        'ical_url' => '',
+        'ical_url' => 'https://www.airbnb.com/calendar/ical/1211468186262258138.ics?t=914d55280d484d679b95aa0fb0625a2c&locale=pt',
     ],
 ];
 
@@ -72,24 +70,36 @@ if (!isset($CHALES[$chaleKey])) {
 
 // ── Função: parse iCal ────────────────────────────────────────────────────────
 function parseIcal(string $url): array {
-    $ctx = stream_context_create(['http' => ['timeout' => 8]]);
+    $ctx = stream_context_create(['http' => ['timeout' => 12]]);
     $raw = @file_get_contents($url, false, $ctx);
     if (!$raw) return [];
 
     $blocked = [];
-    // Extrai blocos VEVENT
-    preg_match_all('/BEGIN:VEVENT(.*?)END:VEVENT/s', $raw, $events);
+    
+    // Quebra o texto usando 'is' para ignorar maiúsculas/minúsculas e quebras de linha sujas
+    preg_match_all('/BEGIN:VEVENT(.*?)END:VEVENT/is', $raw, $events);
+    
     foreach ($events[1] as $ev) {
-        // Pega DTSTART e DTEND (pode ter ;TZID=... ou não)
-        preg_match('/DTSTART[^:]*:([\d]+)/', $ev, $start);
-        preg_match('/DTEND[^:]*:([\d]+)/', $ev, $end);
-        if (!$start || !$end) continue;
+        // Trava 1: Ignora sumariamente reservas canceladas
+        if (stripos($ev, 'STATUS:CANCELLED') !== false) {
+            continue;
+        }
 
-        $s = DateTime::createFromFormat('Ymd', substr($start[1], 0, 8));
-        $e = DateTime::createFromFormat('Ymd', substr($end[1], 0, 8));
+        // Trava 2: Captura estritamente os 8 dígitos da data (YYYYMMDD)
+        // Isso ignora qualquer lixo de fuso horário como "TZID=America/Sao_Paulo" ou horários "T140000Z"
+        preg_match('/DTSTART[^:]*:([\d]{8})/', $ev, $start);
+        preg_match('/DTEND[^:]*:([\d]{8})/', $ev, $end);
+        
+        if (empty($start[1]) || empty($end[1])) {
+            continue;
+        }
+
+        $s = DateTime::createFromFormat('Ymd', $start[1]);
+        $e = DateTime::createFromFormat('Ymd', $end[1]);
+        
         if (!$s || !$e) continue;
 
-        // Itera cada dia do evento (check-out não é bloqueado, apenas check-in até dia anterior)
+        // Trava 3: Adiciona as datas ao array, mantendo o dia de check-out livre
         $cur = clone $s;
         while ($cur < $e) {
             $blocked[] = $cur->format('Y-m-d');

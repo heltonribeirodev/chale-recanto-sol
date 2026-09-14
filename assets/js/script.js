@@ -414,14 +414,15 @@ function initModal() {
     elWrap.hidden    = true;
 
     // Em ambiente local (file:// ou sem PHP), usa mock direto
-    const isLocal = location.protocol === "file:" || location.hostname === "127.0.0.1" || location.hostname === "localhost";
+    // Permite que o localhost e 127.0.0.1 executem o PHP
+const isLocal = location.protocol === "file:";
 
     try {
       if (isLocal) throw new Error("local"); // força fallback mock em dev local
 
       const controller = new AbortController();
       const timeout = setTimeout(() => controller.abort(), 6000);
-      const res = await fetch(`api/disponibilidade.php?chale=${chaleKey}&meses=4`, { signal: controller.signal });
+const res = await fetch(`api/disponibilidade.php?chale=${chaleKey}&meses=4&t=${Date.now()}`, { signal: controller.signal });
       clearTimeout(timeout);
 
       if (!res.ok) throw new Error("HTTP " + res.status);
@@ -500,14 +501,14 @@ function initModal() {
       const agora = hoje();
 
       if (data < agora) {
-        cell.classList.add("cal-day--passado");
-      } else if (sameDay(data, agora)) {
-        cell.classList.add("cal-day--hoje", "cal-day--disponivel");
-      } else if (state.datas[iso] === "indisponivel") {
-        cell.classList.add("cal-day--indisponivel");
-      } else {
-        cell.classList.add("cal-day--disponivel");
-      }
+  cell.classList.add("cal-day--passado");
+} else if (state.datas[iso] === "indisponivel") {
+  cell.classList.add("cal-day--indisponivel");
+  if (sameDay(data, agora)) cell.classList.add("cal-day--hoje");
+} else {
+  cell.classList.add("cal-day--disponivel");
+  if (sameDay(data, agora)) cell.classList.add("cal-day--hoje");
+}
 
       /* Marcação de seleção */
       if (sameDay(data, state.checkin))  cell.classList.add("cal-day--checkin");
@@ -689,26 +690,71 @@ function initModal() {
 
 /* ---- Entry point ---- */
 
-
-
-
-
 /* ---- Dados dos Depoimentos (Adicione no script.js) ---- */
 const DEPOIMENTOS = [
-  { nome: "Marina Costa", data: "03/05/2023", iniciais: "MC", texto: "A melhor experiência que já tive em um hotel no Brasil. O quarto era impecável, a equipe atenciosa e o café da manhã surpreendeu." },
-  { nome: "Ricardo Ferreira", data: "23/12/2025", iniciais: "RF", texto: "Viemos para viagem de negócios e ficamos encantados. O Wi-Fi é excelente e a lareira garantiu o aquecimento perfeito." },
-  { nome: "Ana Lima", data: "05/08/2026", iniciais: "AL", texto: "O pôr do sol visto da varanda é espetacular. O chalé tem tudo o que precisamos para relaxar de verdade." },
-  { nome: "Lucas Silva", data: "12/01/2026", iniciais: "LS", texto: "Lugar maravilhoso para se desconectar da cidade. A fogueira à noite com um bom vinho formaram a combinação perfeita." },
-  { nome: "Fernanda Souza", data: "18/07/2026", iniciais: "FS", texto: "A área externa é linda e super bem cuidada. Fizemos um churrasco no quiosque e foi um momento incrível." },
-  { nome: "Carlos Eduardo", data: "22/11/2025", iniciais: "CE", texto: "Fiz uma surpresa de aniversário de casamento. A equipe organizou uma decoração romântica que superou as expectativas." },
-  { nome: "Juliana Mendes", data: "10/02/2026", iniciais: "JM", texto: "Cesta de café da manhã farta e deliciosa! A facilidade com as luzes e a Alexa integrada deixou tudo mais aconchegante." },
-  { nome: "Roberto Alves", data: "30/04/2026", iniciais: "RA", texto: "Fomos em família e as crianças adoraram o espaço kids. Ambiente seguro e contato maravilhoso com a natureza." },
-  { nome: "Camila Rocha", data: "14/09/2026", iniciais: "CR", texto: "A banheira de hidromassagem na sacada, rodeada de pinheiros, entregou a melhor manhã que já tive em uma viagem." },
-  { nome: "Thiago Oliveira", data: "05/10/2026", iniciais: "TO", texto: "Paz absoluta! Fica bem perto, mas parece que estamos em outro mundo devido ao silêncio. Voltaremos em breve." },
-  { nome: "Marina Costa", data: "03/05/2023", iniciais: "MC", texto: "A melhor experiência que já tive em um hotel no Brasil. O quarto era impecável, a equipe atenciosa e o café da manhã surpreendeu." },
-  { nome: "Ricardo Ferreira", data: "23/12/2025", iniciais: "RF", texto: "Viemos para viagem de negócios e ficamos encantados. O Wi-Fi é excelente e a lareira garantiu o aquecimento perfeito." }
+  { 
+    nome: "Hóspede via Airbnb", 
+    data: "Avaliação verificada", 
+    iniciais: "★", 
+    texto: "A cabana é ainda mais linda pessoalmente. Foi o lugar perfeito para um final de semana especial e romântico, com uma anfitriã atenciosa a todos os detalhes." 
+  },
+  { 
+    nome: "Hóspede via Airbnb", 
+    data: "Estadia recente", 
+    iniciais: "★", 
+    texto: "Lugar incrível! Intimista, romântico e tudo que você procura para um momento a dois. A hidromassagem e a vista são de suspirar." 
+  },
+  { 
+    nome: "Hóspede via Airbnb", 
+    data: "Avaliação verificada", 
+    iniciais: "★", 
+    texto: "O ambiente é acolhedor, cheio de charme e com uma energia tão leve que dá vontade de ficar ali por horas. Combina perfeitamente a decoração, a vista e o clima tranquilo." 
+  },
+  { 
+    nome: "Hóspede via Airbnb", 
+    data: "Estadia recente", 
+    iniciais: "★", 
+    texto: "O chalé é lindo e espaçoso, com móveis de ótima qualidade e sistema de luzes e som inteligentes. Conta com grande imersão na natureza e uma hidromassagem deliciosa!" 
+  },
+  { 
+    nome: "Hóspede via Airbnb", 
+    data: "Avaliação verificada", 
+    iniciais: "★", 
+    texto: "É igualzinho e até melhor do que nas fotos. Amei as florzinhas nos roupões e toalhas. A paisagem é lindíssima e o processo de check-in foi sem burocracia." 
+  },
+  { 
+    nome: "Hóspede via Airbnb", 
+    data: "Estadia recente", 
+    iniciais: "★", 
+    texto: "Lugar impecável! A anfitriã deixou nossa data especial com o capricho do chalé e a vista incrível. Um ambiente extremamente aconchegante e pensado para o seu bem-estar." 
+  },
+  { 
+    nome: "Hóspede via Airbnb", 
+    data: "Avaliação verificada", 
+    iniciais: "★", 
+    texto: "Um lugar que transmite paz e descanso do início ao fim. O chalé é muito novo, limpo e dá para perceber o carinho em cada detalhe, desde a chegada até a vista." 
+  },
+  { 
+    nome: "Hóspede via Airbnb", 
+    data: "Estadia recente", 
+    iniciais: "★", 
+    texto: "Local muito tranquilo e privado. A atenção da Enaiara é um diferencial, com todos os itens novos e organizados. Recomendamos e com certeza voltaremos." 
+  },
+  { 
+    nome: "Hóspede via Airbnb", 
+    data: "Avaliação verificada", 
+    iniciais: "★", 
+    texto: "Parecia que estávamos em uma cena de filme. Mesmo sendo perto de Curitiba e de fácil acesso, a sensação é de estar em um lugar distante no meio da natureza." 
+  },
+  { 
+    nome: "Hóspede via Airbnb", 
+    data: "Estadia recente", 
+    iniciais: "★", 
+    texto: "Uma experiência indescritível. Ficamos muito bem acomodados com duas crianças, que adoraram a casinha na árvore, o lago e a fogueira. Acesso muito fácil." 
+  }
 ];
 
+/* ---- Lógica do Carrossel ---- */
 /* ---- Lógica do Carrossel ---- */
 function initDepoimentosCarousel() {
   const track = document.getElementById("depoimentos-track");
@@ -737,14 +783,12 @@ function initDepoimentosCarousel() {
   let currentIndex = 0;
   let autoPlayInterval;
 
-  // Calcula quantos itens cabem na tela de acordo com a resolução
   function getItemsPerView() {
     if (window.innerWidth >= 1024) return 4;
     if (window.innerWidth >= 640) return 2;
     return 1;
   }
 
-  // Gera as bolinhas de paginação com base nos grupos possíveis
   function renderDots() {
     dotsContainer.innerHTML = "";
     const itemsPerView = getItemsPerView();
@@ -763,10 +807,8 @@ function initDepoimentosCarousel() {
     }
   }
 
-// Desloca o contêiner horizontalmente
   function updateCarousel() {
     const itemsPerView = getItemsPerView();
-    // Previne espaços em branco no final do carrossel
     const maxIndex = Math.max(0, DEPOIMENTOS.length - itemsPerView);
     if (currentIndex > maxIndex) currentIndex = maxIndex;
 
@@ -776,11 +818,7 @@ function initDepoimentosCarousel() {
 
     track.style.transform = `translateX(-${moveAmount}px)`;
 
-    // Sincroniza a classe ativa da bolinha
     let activePage = Math.floor(currentIndex / itemsPerView);
-    
-    // Regra de exceção: Se o índice atingiu o limite máximo (final exato do carrossel), 
-    // força a ativação visual da última bolinha, ignorando a sobra matemática.
     if (currentIndex === maxIndex) {
       activePage = dotsContainer.children.length - 1;
     }
@@ -790,19 +828,38 @@ function initDepoimentosCarousel() {
     });
   }
 
-  // Função para avançar automaticamente
   function nextSlide() {
     const itemsPerView = getItemsPerView();
     const maxIndex = Math.max(0, DEPOIMENTOS.length - itemsPerView);
     
-    currentIndex += itemsPerView;
-    if (currentIndex > maxIndex) currentIndex = 0; // Se passou do limite, volta ao ínicio
-    
+    if (currentIndex >= maxIndex) {
+      currentIndex = 0;
+    } else {
+      currentIndex += itemsPerView;
+      if (currentIndex > maxIndex) {
+        currentIndex = maxIndex;
+      }
+    }
+    updateCarousel();
+  }
+
+  function prevSlide() {
+    const itemsPerView = getItemsPerView();
+    const maxIndex = Math.max(0, DEPOIMENTOS.length - itemsPerView);
+
+    if (currentIndex <= 0) {
+      currentIndex = maxIndex;
+    } else {
+      currentIndex -= itemsPerView;
+      if (currentIndex < 0) {
+        currentIndex = 0;
+      }
+    }
     updateCarousel();
   }
 
   function startAutoPlay() {
-    autoPlayInterval = setInterval(nextSlide, 3000); // Rotação a cada 3 segundos
+    autoPlayInterval = setInterval(nextSlide, 3000);
   }
 
   function resetAutoPlay() {
@@ -810,18 +867,47 @@ function initDepoimentosCarousel() {
     startAutoPlay();
   }
 
-  // Ouve eventos de redimensionamento da janela para ajustar matemática do layout
   window.addEventListener("resize", () => {
     renderDots();
     updateCarousel();
   });
 
-  // Pausar auto-play em caso de hover (Foco em Experiência do Usuário)
+  let startX = 0;
+  let currentX = 0;
+
+  wrapper.addEventListener("touchstart", (e) => {
+    clearInterval(autoPlayInterval);
+    startX = e.touches[0].clientX;
+    currentX = startX; 
+  }, { passive: true });
+
+  wrapper.addEventListener("touchmove", (e) => {
+    currentX = e.touches[0].clientX;
+  }, { passive: true });
+
+  wrapper.addEventListener("touchend", () => {
+    const diffX = startX - currentX;
+    const swipeThreshold = 50;
+
+    if (currentX !== startX) {
+      if (diffX > swipeThreshold) {
+        nextSlide();
+        resetAutoPlay();
+      } else if (diffX < -swipeThreshold) {
+        prevSlide();
+        resetAutoPlay();
+      } else {
+        startAutoPlay();
+      }
+    } else {
+      startAutoPlay();
+    }
+  });
+
   wrapper.addEventListener("mouseenter", () => clearInterval(autoPlayInterval));
   wrapper.addEventListener("mouseleave", startAutoPlay);
-  wrapper.addEventListener("touchstart", () => clearInterval(autoPlayInterval)); // Suporte a toque no celular
 
-  // Execução inicial
+  // Inicializa o carrossel
   renderDots();
   updateCarousel();
   startAutoPlay();

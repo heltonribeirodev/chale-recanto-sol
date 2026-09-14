@@ -285,16 +285,16 @@ p {
 
 /* ----- Navigation (Versão Otimizada) ----- */
 .nav-bar {
-  position: sticky;
+  position: fixed; /* Mudou de sticky para fixed */
   top: 0;
+  left: 0;         /* Garante o alinhamento no canto esquerdo */
+  width: 100%;     /* Força a barra a ocupar a tela toda */
   z-index: 100;
   -webkit-transform: translateZ(0);
-  /* fix iOS sticky + GPU compositing */
   transform: translateZ(0);
-  background: rgba(250, 247, 242, .92);
+  background: rgba(250, 247, 242, .92); /* Mantém a sua cor original */
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  /* Suporte essencial para Safari/iPhone */
   border-bottom: 1px solid transparent;
   transition: border-color var(--transition), background var(--transition);
 }
@@ -314,24 +314,26 @@ p {
 
 .nav-brand {
   display: flex;
-  flex-direction: column;
-  line-height: 1.2;
-  flex-shrink: 0;
+  flex-direction: row; /* Altera o empilhamento para alinhamento horizontal */
+  align-items: center; /* Centraliza a imagem com os textos no eixo Y */
+  gap: 12px; /* Define um distanciamento seguro entre a imagem e o texto */
+  flex-shrink: 0; /* Preserva o comportamento do flexbox original[cite: 2] */
 }
 
-.nav-brand-name {
-  font-family: 'Fraunces', serif;
-  font-size: 1.2rem;
-  font-weight: 500;
-  color: var(--fg);
+.nav-brand-img {
+  height: 40px; /* Trava a altura para proteger a área de rolagem */
+  width: auto;
+  object-fit: contain;
 }
 
-.nav-brand-sub {
-  font-family: 'DM Sans', sans-serif;
-  font-size: .6rem;
-  letter-spacing: .25em;
-  text-transform: uppercase;
-  color: var(--fg-muted);
+.nav-brand-text {
+  display: flex;
+  flex-direction: column; /* Mantém os dois spans empilhados internamente */
+  line-height: 1.2; /* Transfere o line-height original para o grupo de texto[cite: 2] */
+  & span {
+    font-family: "Fraunces", serif;
+    font-size: 16px;
+  }
 }
 
 .nav-links {
@@ -1417,8 +1419,8 @@ footer {
 }
 
 .footer-brand img {
-  width: 90px;
-  height: 90px;
+  width: 160px;
+  height:100px;
   object-fit: contain;
   margin-bottom: 1rem;
 }
@@ -2611,10 +2613,6 @@ img.lazy-loaded {
   overflow: hidden;
 }
 
-.hist-img-main:hover img {
-  transform: scale(1.03);
-}
-
 /* ── Reduce motion: desativa animações para quem prefere ────── */
 @media (prefers-reduced-motion: reduce) {
 
@@ -2629,4 +2627,9 @@ img.lazy-loaded {
     opacity: 1 !important;
     transform: none !important;
   }
+}
+
+/* Força a ocultação de elementos com o atributo hidden */
+[hidden] {
+  display: none !important;
 }
