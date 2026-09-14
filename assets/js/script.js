@@ -192,15 +192,15 @@ function criarCardChale(chale, index) {
       <div class="chale-precos">
         <div class="precos-grid">
           <div class="preco-item">
-            <p class="preco-label">Seg, ter, qua e quinta</p>
+            <p class="preco-label">Diária<br>(Seg&nbsp;a&nbsp;Qui)</p>
             <p class="preco-val">${brl(chale.precos.semana)}</p>
           </div>
           <div class="preco-item">
-            <p class="preco-label">Sex, sáb, dom e feriados</p>
+            <p class="preco-label">Diária<br>(Sex&nbsp;a&nbsp;Dom/Fer)</p>
             <p class="preco-val">${brl(chale.precos.fimSemana)}</p>
           </div>
           <div class="preco-item destaque">
-            <p class="preco-label">Pacote fim de semana</p>
+            <p class="preco-label">Pacote<br>Fim&nbsp;de&nbsp;Semana</p>
             <p class="preco-val">${brl(chale.precos.pacote)}</p>
           </div>
         </div>
