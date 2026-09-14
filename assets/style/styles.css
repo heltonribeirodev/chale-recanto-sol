@@ -691,31 +691,31 @@ p { max-width: 60ch; }
   box-shadow: var(--shadow);
 }
 
-.ext-features {
-  display: flex;
-  flex-direction: column;
-  gap: 16px; /* Reduz o gap externo porque usaremos padding interno */
-}
-
+/* Remove o aspecto de "card de aplicativo" e adota um visual editorial */
 .ext-features li {
   display: flex;
-  gap: 18px;
+  gap: 22px; 
   align-items: flex-start;
-  padding: 18px 24px; /* Espaçamento interno */
-  background: rgba(255, 255, 255, 0.03); /* Fundo levemente translúcido */
-  border: 1px solid rgba(255, 255, 255, 0.06); /* Borda bem fina para contorno */
-  border-radius: var(--radius-sm);
-  transition: transform var(--transition), background var(--transition), border-color var(--transition);
+  padding: 20px 0; /* Remove padding lateral, focando no espaçamento vertical */
+  background: transparent; /* Remove o fundo translúcido */
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06); /* Apenas uma linha divisória elegante na base */
+  border-radius: 0;
+  transition: transform var(--transition);
 }
 
-/* Efeito ao passar o mouse */
+/* Remove a linha divisória do último item para um acabamento limpo */
+.ext-features li:last-child {
+  border-bottom: none;
+}
+
+/* Interação sutil: deslocamento lateral orgânico em vez de flutuação de card */
 .ext-features li:hover {
-  background: rgba(255, 255, 255, 0.07);
-  border-color: rgba(212, 168, 67, 0.3); /* Puxa um tom de ouro sutil na borda */
-  transform: translateY(-2px);
+  background: transparent;
+  transform: translateX(6px); 
 }
 
-/* Se precisar ajustar a cor do ícone, o código original já está ótimo, mas confira se o background dele contrasta bem */
+/* Transforma o contêiner do ícone em algo orgânico */
 .ext-icon {
   display: flex;
   align-items: center;
@@ -723,9 +723,16 @@ p { max-width: 60ch; }
   width: 44px;
   height: 44px;
   flex-shrink: 0;
-  background: rgba(212, 168, 67, 0.15); /* Já presente no seu código original */
-  border-radius: 10px;
+  background: transparent; /* Remove o fundo sólido */
+  border: 1px solid rgba(212, 168, 67, 0.35); /* Círculo em traço fino dourado */
+  border-radius: 50%; /* Formas circulares transmitem mais conforto que quadrados */
   color: var(--gold-light);
+}
+
+/* Mantém a rotação e ampliação originais do hover no ícone */
+.ext-features li:hover .ext-icon {
+  transform: scale(1.12) rotate(-3deg);
+  border-color: var(--gold-light);
 }
 
 .ext-features h3 {
