@@ -2,15 +2,15 @@
 /**
  * API de Disponibilidade — Recanto do Sol Chalés
  * ------------------------------------------------
- * Retorna datas indisponíveis para cada chalé.
- * 
- * PARA INTEGRAR COM AIRBNB (iCal):
- *   1. No Airbnb, vá em: Anúncio → Disponibilidade → Exportar calendário
- *   2. Copie o link .ics gerado
- *   3. Cole na constante ICAL_URL do chalé correspondente abaixo
- *   4. Remova o array $manualDates quando usar iCal
- * 
- * Uso: GET /api/disponibilidade.php?chale=sol&meses=2
+ * Retorna datas indisponíveis para cada chalé via iCal do Airbnb.
+ * Suporta status: "disponivel" | "indisponivel" | "preparo"
+ *
+ * Uso: GET /api/disponibilidade.php?chale=sol&meses=3&preparo=1
+ *
+ * COMO ATUALIZAR OS LINKS iCAL:
+ *   1. Airbnb → Anúncios → clique no anúncio
+ *   2. Disponibilidade → Sincronizar calendários → Exportar calendário
+ *   3. Cole o link novo abaixo em 'ical_url'
  */
 
 header('Content-Type: application/json; charset=utf-8');
@@ -19,44 +19,20 @@ header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
 header('Pragma: no-cache');
 
 // ── Configuração dos Chalés ──────────────────────────────────────────────────
-//
-// COMO PEGAR O LINK iCAL DO AIRBNB:
-//   1. Acesse airbnb.com.br → Anúncios → clique no seu anúncio
-//   2. Vá em: Disponibilidade → Sincronizar calendários → Exportar calendário
-//   3. Copie o link gerado (começa com https://www.airbnb.com.br/calendar/ical/...)
-//   4. Cole abaixo em 'ical_url' do chalé correspondente
-//
-// LINK DE TESTE (Google Calendar público — para validar o parser):
-//   https://calendar.google.com/calendar/ical/en.brazilian%23holiday%40group.v.calendar.google.com/public/basic.ics
-//   (feriados brasileiros — útil para ver como datas bloqueadas aparecem no calendário)
-//
 $CHALES = [
     'sol' => [
         'nome'     => 'Chalé Pôr do Sol',
-        'ical_url' => 'https://www.airbnb.com/calendar/ical/1277477003441238955.ics?t=7c057740bdbc41acb371c22e99a2209a&locale=pt',
+        'ical_url' => 'https://www.airbnb.com/calendar/ical/1211468186262258138.ics?t=914d55280d484d679b95aa0fb0625a2c',
     ],
     'bosque' => [
         'nome'     => 'Chalé Recanto do Bosque',
-        'ical_url' => 'https://www.airbnb.com/calendar/ical/1211468186262258138.ics?t=914d55280d484d679b95aa0fb0625a2c&locale=pt',
+        'ical_url' => 'https://www.airbnb.com/calendar/ical/1277477003441238955.ics?t=7c057740bdbc41acb371c22e99a2209a',
     ],
 ];
 
-// ── Datas bloqueadas manuais (use enquanto não tem iCal) ─────────────────────
-// Formato: 'YYYY-MM-DD'
-$manualDates = [
-    'sol' => [
-        // Exemplos — apague e coloque as datas reais:
-        '2026-09-19', '2026-09-20', '2026-09-21',
-        '2026-10-03', '2026-10-04', '2026-10-05',
-        '2026-10-10', '2026-10-11',
-        '2026-11-14', '2026-11-15',
-    ],
-    'bosque' => [
-        '2026-09-26', '2026-09-27', '2026-09-28',
-        '2026-10-17', '2026-10-18', '2026-10-19',
-        '2026-11-07', '2026-11-08', '2026-11-09',
-    ],
-];
+// ── Dias de preparo (limpeza) antes de cada check-in ─────────────────────────
+// 0 = sem preparo | 1 = 1 dia de limpeza (padrão Airbnb)
+define('DIAS_PREPARO', 1);
 
 // ── Parâmetros da requisição ──────────────────────────────────────────────────
 $chaleKey = $_GET['chale'] ?? 'sol';
@@ -68,75 +44,157 @@ if (!isset($CHALES[$chaleKey])) {
     exit;
 }
 
-// ── Função: parse iCal ────────────────────────────────────────────────────────
-function parseIcal(string $url): array {
-    $ctx = stream_context_create(['http' => ['timeout' => 12]]);
+// ── Função: faz o parse do arquivo .ics ──────────────────────────────────────
+// Retorna array com:
+//   'bloqueadas' => datas ocupadas por hóspedes
+//   'checkins'   => datas de check-in (para calcular preparo)
+function parseIcal(string $url): array
+{
+    $ctx = stream_context_create(['http' => ['timeout' => 15]]);
     $raw = @file_get_contents($url, false, $ctx);
-    if (!$raw) return [];
 
-    $blocked = [];
-    
-    // Quebra o texto usando 'is' para ignorar maiúsculas/minúsculas e quebras de linha sujas
-    preg_match_all('/BEGIN:VEVENT(.*?)END:VEVENT/is', $raw, $events);
-    
+    if (!$raw) {
+        return ['bloqueadas' => [], 'checkins' => []];
+    }
+
+    // Normaliza quebras de linha e faz unfold de linhas longas
+    $raw = str_replace("\r\n", "\n", $raw);
+    $raw = preg_replace('/\n[ \t]/', '', $raw);
+
+    $bloqueadas = [];
+    $checkins   = [];
+
+    preg_match_all('/BEGIN:VEVENT(.*?)END:VEVENT/si', $raw, $events);
+
     foreach ($events[1] as $ev) {
-        // Trava 1: Ignora sumariamente reservas canceladas
+
+        // Ignora reservas canceladas
         if (stripos($ev, 'STATUS:CANCELLED') !== false) {
             continue;
         }
 
-        // Trava 2: Captura estritamente os 8 dígitos da data (YYYYMMDD)
-        // Isso ignora qualquer lixo de fuso horário como "TZID=America/Sao_Paulo" ou horários "T140000Z"
-        preg_match('/DTSTART[^:]*:([\d]{8})/', $ev, $start);
-        preg_match('/DTEND[^:]*:([\d]{8})/', $ev, $end);
-        
+        // Captura DTSTART e DTEND
+        preg_match('/DTSTART(?:;[^:]*)?:([^\r\n]+)/i', $ev, $start);
+        preg_match('/DTEND(?:;[^:]*)?:([^\r\n]+)/i',   $ev, $end);
+
         if (empty($start[1]) || empty($end[1])) {
             continue;
         }
 
-        $s = DateTime::createFromFormat('Ymd', $start[1]);
-        $e = DateTime::createFromFormat('Ymd', $end[1]);
-        
-        if (!$s || !$e) continue;
+        // Extrai apenas os 8 dígitos da data (YYYYMMDD)
+        $startDate = substr(preg_replace('/\D/', '', trim($start[1])), 0, 8);
+        $endDate   = substr(preg_replace('/\D/', '', trim($end[1])),   0, 8);
 
-        // Trava 3: Adiciona as datas ao array, mantendo o dia de check-out livre
+        if (strlen($startDate) < 8 || strlen($endDate) < 8) {
+            continue;
+        }
+
+        $s = DateTime::createFromFormat('Ymd', $startDate);
+        $e = DateTime::createFromFormat('Ymd', $endDate);
+
+        if (!$s || !$e || $s >= $e) {
+            continue;
+        }
+
+        // Salva data de check-in para calcular preparo depois
+        $checkins[] = $s->format('Y-m-d');
+
+        // Bloqueia do check-in até o dia anterior ao check-out
         $cur = clone $s;
         while ($cur < $e) {
-            $blocked[] = $cur->format('Y-m-d');
+            $bloqueadas[] = $cur->format('Y-m-d');
             $cur->modify('+1 day');
         }
     }
-    return array_unique($blocked);
+
+    return [
+        'bloqueadas' => array_values(array_unique($bloqueadas)),
+        'checkins'   => array_values(array_unique($checkins)),
+    ];
 }
 
-// ── Resolve datas bloqueadas ──────────────────────────────────────────────────
+// ── Função: iCal com cache em arquivo (1 hora) ────────────────────────────────
+function parseIcalComCache(string $url, string $chave): array
+{
+    $arquivo  = sys_get_temp_dir() . "/ical_recanto_{$chave}.json";
+    $maxIdade = 3600;
+
+    if (file_exists($arquivo) && (time() - filemtime($arquivo)) < $maxIdade) {
+        $dados = json_decode(file_get_contents($arquivo), true);
+        if (!empty($dados['bloqueadas'])) {
+            return $dados;
+        }
+    }
+
+    $resultado = parseIcal($url);
+
+    if (!empty($resultado['bloqueadas'])) {
+        file_put_contents($arquivo, json_encode($resultado));
+        return $resultado;
+    }
+
+    if (file_exists($arquivo)) {
+        $dados = json_decode(file_get_contents($arquivo), true);
+        return is_array($dados) ? $dados : ['bloqueadas' => [], 'checkins' => []];
+    }
+
+    return ['bloqueadas' => [], 'checkins' => []];
+}
+
+// ── Busca datas do iCal ───────────────────────────────────────────────────────
 $chaleCfg = $CHALES[$chaleKey];
-$bloqueadas = [];
+$icalData = parseIcalComCache($chaleCfg['ical_url'], $chaleKey);
 
-if (!empty($chaleCfg['ical_url'])) {
-    // Produção: puxa do Airbnb
-    $bloqueadas = parseIcal($chaleCfg['ical_url']);
-} else {
-    // Fallback: datas manuais
-    $bloqueadas = $manualDates[$chaleKey] ?? [];
+$bloqueadas = $icalData['bloqueadas'];
+$checkins   = $icalData['checkins'];
+
+// ── Calcula dias de preparo ───────────────────────────────────────────────────
+// Para cada check-in, bloqueia os N dias anteriores como "preparo"
+$diasPreparo = [];
+
+if (DIAS_PREPARO > 0) {
+    foreach ($checkins as $checkin) {
+        for ($i = 1; $i <= DIAS_PREPARO; $i++) {
+            $d = new DateTime($checkin);
+            $d->modify("-{$i} day");
+            $prepDia = $d->format('Y-m-d');
+
+            // Só marca como preparo se não for já uma data bloqueada por hóspede
+            if (!in_array($prepDia, $bloqueadas)) {
+                $diasPreparo[] = $prepDia;
+            }
+        }
+    }
+    $diasPreparo = array_unique($diasPreparo);
 }
 
-// ── Monta resposta com os meses solicitados ───────────────────────────────────
-$hoje   = new DateTime('today');
-$fim    = (clone $hoje)->modify("+{$meses} months");
-$resultado = [];
+// ── Monta resposta ────────────────────────────────────────────────────────────
+$hoje = new DateTime('today');
+$fim  = (clone $hoje)->modify("+{$meses} months");
 
+$resultado = [];
 $cur = clone $hoje;
+
 while ($cur <= $fim) {
     $iso = $cur->format('Y-m-d');
-    $resultado[$iso] = in_array($iso, $bloqueadas) ? 'indisponivel' : 'disponivel';
+
+    if (in_array($iso, $bloqueadas)) {
+        $status = 'indisponivel';
+    } elseif (in_array($iso, $diasPreparo)) {
+        $status = 'preparo';     // bloqueado para limpeza — igual ao cinza do Airbnb
+    } else {
+        $status = 'disponivel';
+    }
+
+    $resultado[$iso] = $status;
     $cur->modify('+1 day');
 }
 
 echo json_encode([
-    'chale'      => $chaleKey,
-    'nome'       => $chaleCfg['nome'],
-    'gerado_em'  => date('c'),
-    'fonte'      => !empty($chaleCfg['ical_url']) ? 'airbnb_ical' : 'manual',
-    'datas'      => $resultado,
-]);
+    'chale'        => $chaleKey,
+    'nome'         => $chaleCfg['nome'],
+    'gerado_em'    => date('c'),
+    'fonte'        => 'airbnb_ical',
+    'dias_preparo' => DIAS_PREPARO,
+    'datas'        => $resultado,
+], JSON_PRETTY_PRINT);

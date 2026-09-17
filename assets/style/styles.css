@@ -1777,6 +1777,14 @@ footer {
   cursor: default;
 }
 
+.cal-day--indisponivel.cal-day--hoje {
+  color: rgba(255, 255, 255, .22) !important;
+  background: rgba(255, 255, 255, .04) !important;
+  border-color: rgba(255, 255, 255, .15) !important;
+  text-decoration: line-through;
+  cursor: not-allowed;
+}
+
 .cal-day--indisponivel {
   color: rgba(255, 255, 255, .22);
   cursor: not-allowed;
