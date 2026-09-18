@@ -1,0 +1,9 @@
+RewriteEngine On
+
+# 1. Redireciona a URL antiga com .html para a versão limpa (preserva o SEO)
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /([^\ ]+)\.html
+RewriteRule ^/?(.*)\.html$ /$1 [L,R=301]
+
+# 2. Informa ao servidor para ler o arquivo .html internamente quando a URL limpa for acessada
+RewriteCond %{REQUEST_FILENAME}\.html -f
+RewriteRule ^(.*)$ $1.html [L]

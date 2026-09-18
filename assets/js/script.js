@@ -4,15 +4,15 @@
    ============================================================ */
 
 
-   /* ============================================================
-   Lenis - Scroll Suave com Inércia
-   ============================================================ */
+/* ============================================================
+Lenis - Scroll Suave com Inércia
+============================================================ */
 function initSmoothScroll() {
   // Inicializa o motor com as configurações de peso e inércia
   const lenis = new Lenis({
     duration: 1.2,       // Quão demorado é o arrasto
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Curva matemática da suavidade
-    direction: 'vertical', 
+    direction: 'vertical',
     gestureDirection: 'vertical',
     smooth: true,
     mouseMultiplier: 1,  // Força do mouse wheel
@@ -27,7 +27,7 @@ function initSmoothScroll() {
     requestAnimationFrame(raf);
   }
   requestAnimationFrame(raf);
-  
+
   // (OPCIONAL) Faz com que seus links com âncoras (href="#historia") deslizem suavemente usando a física do Lenis
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener('click', (e) => {
@@ -35,7 +35,7 @@ function initSmoothScroll() {
       if (id !== '#') {
         e.preventDefault();
         // O offset subtrai a altura do header fixo (ex: 80px)
-        lenis.scrollTo(id, { offset: -80 }); 
+        lenis.scrollTo(id, { offset: -80 });
       }
     });
   });
@@ -71,32 +71,39 @@ const CHALES = [
     badge: "Vista aberta do pôr do sol",
     capacidade: "Casal com até 2 crianças",
     chamada: "O mais tecnológico, com lareira a lenha, Alexa e hidromassagem",
+
     descricao:
-      "Uma estadia relaxante em um chalé completamente equipado, com atmosfera aconchegante e tecnológica — pensado para quem quer ver o sol se despedir da varanda com conforto total.",
+      "Uma experiência de conforto e tranquilidade em um chalé completo, que combina tecnologia, aconchego e uma vista privilegiada. Relaxe na hidromassagem, aproveite a lareira a lenha e contemple o pôr do sol diretamente da sua varanda privativa.",
+
     comodidades: [
-      "Hidromassagem",
-      "Cozinha equipada completa",
       "Lareira a lenha",
-      "Alexa e luzes inteligentes",
+      "Banheira de hidromassagem",
+      "Alexa",
+      "Vista para o horizonte da cidade",
+      "Vista para o vale",
+      "Varanda privativa",
+      "Lareira externa",
+      "Churrasqueira",
+      "Ar-condicionado",
       "Wi-Fi",
-      "Sofá-cama confortável",
-      "Banheiro privativo",
-      "TV a cabo",
+      "Cafeteira",
+      "Acesso ao lago",
     ],
+
     andarSuperior:
       "Cama queen com massagem e ar-condicionado — roupas de cama e banho inclusas",
     precos: { semana: 650, fimSemana: 850, pacote: 1300 },
     galeria: [
-      { src: "assets/img/sol/drone2.webp",       alt: "Fachada do Chalé Pôr do Sol ao meio-dia" },
-      { src: "assets/img/sol/sol-exterior-noite.webp",     alt: "Chalé Pôr do Sol iluminado ao anoitecer" },
-      { src: "assets/img/sol/sala.webp",     alt: "Chalé Pôr do Sol iluminado ao anoitecer" },
-      { src: "assets/img/sol/tv.webp",     alt: "Chalé Pôr do Sol iluminado ao anoitecer" },
-      { src: "assets/img/sol/cozinha.webp",     alt: "Chalé Pôr do Sol iluminado ao anoitecer" },
-      { src: "assets/img/sol/banheira.webp",     alt: "Chalé Pôr do Sol iluminado ao anoitecer" },
-      { src: "assets/img/sol/banheira2.webp",     alt: "Chalé Pôr do Sol iluminado ao anoitecer" },
-      { src: "assets/img/sol/vista2-andar.webp",     alt: "Chalé Pôr do Sol iluminado ao anoitecer" },
-      { src: "assets/img/sol/cama-decorada.webp",     alt: "Chalé Pôr do Sol iluminado ao anoitecer" },
-      { src: "assets/img/sol/vista-cama.webp",     alt: "Chalé Pôr do Sol iluminado ao anoitecer" }
+      { src: "assets/img/sol/drone2.webp", alt: "Fachada do Chalé Pôr do Sol ao meio-dia" },
+      { src: "assets/img/sol/sol-exterior-noite.webp", alt: "Chalé Pôr do Sol iluminado ao anoitecer" },
+      { src: "assets/img/sol/sala.webp", alt: "Chalé Pôr do Sol iluminado ao anoitecer" },
+      { src: "assets/img/sol/tv.webp", alt: "Chalé Pôr do Sol iluminado ao anoitecer" },
+      { src: "assets/img/sol/cozinha.webp", alt: "Chalé Pôr do Sol iluminado ao anoitecer" },
+      { src: "assets/img/sol/banheira.webp", alt: "Chalé Pôr do Sol iluminado ao anoitecer" },
+      { src: "assets/img/sol/banheira2.webp", alt: "Chalé Pôr do Sol iluminado ao anoitecer" },
+      { src: "assets/img/sol/vista2-andar.webp", alt: "Chalé Pôr do Sol iluminado ao anoitecer" },
+      { src: "assets/img/sol/cama-decorada.webp", alt: "Chalé Pôr do Sol iluminado ao anoitecer" },
+      { src: "assets/img/sol/vista-cama.webp", alt: "Chalé Pôr do Sol iluminado ao anoitecer" }
     ],
   },
   {
@@ -106,31 +113,36 @@ const CHALES = [
     capacidade: "Casal com até 2 crianças",
     chamada: "Cercado de pinheiros, com rede suspensa e banheira de hidromassagem",
     descricao:
-      "Um refúgio entre as árvores para casais que querem silêncio, banho de hidromassagem na sacada e o som dos pássaros ao despertar.",
+      "Um refúgio entre as árvores para casais que buscam tranquilidade e momentos especiais. Relaxe na hidromassagem da varanda, aproveite o aconchego da lareira e desperte ao som dos pássaros em meio à natureza.",
+
     comodidades: [
       "Banheira de hidromassagem",
-      "Cozinha completa",
-      "Lareira elétrica",
+      "Varanda privativa",
+      "Vista para a natureza",
+      "Lareira interna",
       "Alexa",
-      "Wi-Fi",
-      "Sofá-cama confortável",
-      "Banheiro privativo",
+      "Cozinha completa",
+      "Ar-condicionado",
       "Rede suspensa",
+      "Churrasqueira",
+      "Wi-Fi",
+      "Acesso ao lago",
+      "Cafeteira",
     ],
     andarSuperior:
       "Cama de casal, ar-condicionado, TV a cabo e sacada — roupas de cama e banho inclusas",
     precos: { semana: 500, fimSemana: 700, pacote: 1100 },
     galeria: [
-      { src: "assets/img/bosque/bosque-exterior-dia.webp",  alt: "Chalé Recanto do Bosque entre os pinheiros — vista frontal" },
-      { src: "assets/img/bosque/bosque-exterior-noite.webp",  alt: "Chalé Recanto do Bosque entre os pinheiros — vista frontal" },
-      { src: "assets/img/bosque/sala.webp",  alt: "Chalé Recanto do Bosque entre os pinheiros — vista frontal" },
-      { src: "assets/img/bosque/sala2.webp",  alt: "Chalé Recanto do Bosque entre os pinheiros — vista frontal" },
-      { src: "assets/img/bosque/cozinha.webp",  alt: "Chalé Recanto do Bosque entre os pinheiros — vista frontal" },
-      { src: "assets/img/bosque/cozinha-ampla.webp",  alt: "Chalé Recanto do Bosque entre os pinheiros — vista frontal" },
-      { src: "assets/img/bosque/banheira.jpg",  alt: "Chalé Recanto do Bosque entre os pinheiros — vista frontal" },
-      { src: "assets/img/bosque/cama-decorada.webp",  alt: "Chalé Recanto do Bosque entre os pinheiros — vista frontal" },
-      { src: "assets/img/bosque/rede-suspensa.webp",  alt: "Chalé Recanto do Bosque entre os pinheiros — vista frontal" },
-      { src: "assets/img/bosque/drone.webp",  alt: "Chalé Recanto do Bosque entre os pinheiros — vista frontal" },
+      { src: "assets/img/bosque/bosque-exterior-dia.webp", alt: "Chalé Recanto do Bosque entre os pinheiros — vista frontal" },
+      { src: "assets/img/bosque/bosque-exterior-noite.webp", alt: "Chalé Recanto do Bosque entre os pinheiros — vista frontal" },
+      { src: "assets/img/bosque/sala.webp", alt: "Chalé Recanto do Bosque entre os pinheiros — vista frontal" },
+      { src: "assets/img/bosque/sala2.webp", alt: "Chalé Recanto do Bosque entre os pinheiros — vista frontal" },
+      { src: "assets/img/bosque/cozinha.webp", alt: "Chalé Recanto do Bosque entre os pinheiros — vista frontal" },
+      { src: "assets/img/bosque/cozinha-ampla.webp", alt: "Chalé Recanto do Bosque entre os pinheiros — vista frontal" },
+      { src: "assets/img/bosque/banheira.jpg", alt: "Chalé Recanto do Bosque entre os pinheiros — vista frontal" },
+      { src: "assets/img/bosque/cama-decorada.webp", alt: "Chalé Recanto do Bosque entre os pinheiros — vista frontal" },
+      { src: "assets/img/bosque/rede-suspensa.webp", alt: "Chalé Recanto do Bosque entre os pinheiros — vista frontal" },
+      { src: "assets/img/bosque/drone.webp", alt: "Chalé Recanto do Bosque entre os pinheiros — vista frontal" },
     ],
   },
 ];
@@ -156,8 +168,8 @@ function criarCardChale(chale, index) {
       </div>
       <div class="chale-thumbs" role="list" aria-label="Fotos do ${chale.nome}">
         ${chale.galeria
-          .map(
-            (g, i) => `
+      .map(
+        (g, i) => `
           <button
             class="chale-thumb"
             data-index="${i}"
@@ -168,8 +180,8 @@ function criarCardChale(chale, index) {
           >
             <img src="${g.src}" alt="" loading="lazy" />
           </button>`
-          )
-          .join("")}
+      )
+      .join("")}
       </div>
     </div>
 
@@ -320,57 +332,57 @@ function initActiveNav() {
    MODAL — Calendário de Disponibilidade
    ════════════════════════════════════════════════════ */
 function initModal() {
-  const overlay   = document.getElementById("modal-datas");
-  const closeBtn  = document.getElementById("modal-close");
+  const overlay = document.getElementById("modal-datas");
+  const closeBtn = document.getElementById("modal-close");
   const submitBtn = document.getElementById("modal-submit");
   if (!overlay) return;
 
   /* ── Estado global do calendário ─────────────────── */
   const state = {
-    chaleKey    : "sol",        // "sol" | "bosque"
-    chaleName   : "",
-    datas       : {},           // { "YYYY-MM-DD": "disponivel" | "indisponivel" }
-    viewOffset  : 0,            // quantos meses à frente da data atual
-    checkin     : null,         // Date | null
-    checkout    : null,         // Date | null
-    hospedes    : 2,
-    carregando  : false,
+    chaleKey: "sol",        // "sol" | "bosque"
+    chaleName: "",
+    datas: {},           // { "YYYY-MM-DD": "disponivel" | "indisponivel" }
+    viewOffset: 0,            // quantos meses à frente da data atual
+    checkin: null,         // Date | null
+    checkout: null,         // Date | null
+    hospedes: 2,
+    carregando: false,
   };
 
   /* ── Utilitários de data ─────────────────────────── */
   const hoje = () => {
-    const d = new Date(); d.setHours(0,0,0,0); return d;
+    const d = new Date(); d.setHours(0, 0, 0, 0); return d;
   };
-  const isoDate  = (d) => d.toISOString().split("T")[0];
-  const fmtBR    = (d) => d.toLocaleDateString("pt-BR", { day: "2-digit", month: "short", year: "numeric" });
+  const isoDate = (d) => d.toISOString().split("T")[0];
+  const fmtBR = (d) => d.toLocaleDateString("pt-BR", { day: "2-digit", month: "short", year: "numeric" });
   const addMonth = (d, n) => { const r = new Date(d); r.setMonth(r.getMonth() + n); return r; };
-  const sameDay  = (a, b) => a && b && isoDate(a) === isoDate(b);
-  const between  = (d, a, b) => a && b && d > a && d < b;
+  const sameDay = (a, b) => a && b && isoDate(a) === isoDate(b);
+  const between = (d, a, b) => a && b && d > a && d < b;
 
-  const DIAS_SEMANA = ["DOM","SEG","TER","QUA","QUI","SEX","SÁB"];
-  const MESES_PT    = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho",
-                       "Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
+  const DIAS_SEMANA = ["DOM", "SEG", "TER", "QUA", "QUI", "SEX", "SÁB"];
+  const MESES_PT = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+    "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
 
   /* ── Elementos DOM ───────────────────────────────── */
-  const elLoading  = document.getElementById("cal-loading");
-  const elError    = document.getElementById("cal-error");
-  const elWrap     = document.getElementById("cal-wrap");
-  const elMonths   = document.getElementById("cal-months");
-  const elPrev     = document.getElementById("cal-prev");
-  const elNext     = document.getElementById("cal-next");
-  const elCheckin  = document.getElementById("val-checkin");
+  const elLoading = document.getElementById("cal-loading");
+  const elError = document.getElementById("cal-error");
+  const elWrap = document.getElementById("cal-wrap");
+  const elMonths = document.getElementById("cal-months");
+  const elPrev = document.getElementById("cal-prev");
+  const elNext = document.getElementById("cal-next");
+  const elCheckin = document.getElementById("val-checkin");
   const elCheckout = document.getElementById("val-checkout");
   const elHospedes = document.getElementById("val-hospedes");
-  const elFooter   = document.getElementById("modal-footer");
-  const elEyebrow  = document.getElementById("modal-chale-eyebrow");
-  const elRetry    = document.getElementById("cal-retry");
-  const elHint     = document.getElementById("cal-hint");
+  const elFooter = document.getElementById("modal-footer");
+  const elEyebrow = document.getElementById("modal-chale-eyebrow");
+  const elRetry = document.getElementById("cal-retry");
+  const elHint = document.getElementById("cal-hint");
 
   /* ── Dados mock para testes locais (sem servidor PHP) ── */
   function gerarMockDatas(chaleKey) {
     const datas = {};
-    const hoje_ = new Date(); hoje_.setHours(0,0,0,0);
-    const fim   = new Date(hoje_); fim.setMonth(fim.getMonth() + 4);
+    const hoje_ = new Date(); hoje_.setHours(0, 0, 0, 0);
+    const fim = new Date(hoje_); fim.setMonth(fim.getMonth() + 4);
 
     // Bloqueios de exemplo — substitua pelas datas reais no PHP
     const bloqueiosMock = {
@@ -392,7 +404,7 @@ function initModal() {
 
     function diasEntre(inicio, fim_) {
       const result = []; const c = new Date(inicio);
-      while (c <= new Date(fim_)) { result.push(c.toISOString().split("T")[0]); c.setDate(c.getDate()+1); }
+      while (c <= new Date(fim_)) { result.push(c.toISOString().split("T")[0]); c.setDate(c.getDate() + 1); }
       return result;
     }
 
@@ -410,19 +422,19 @@ function initModal() {
   async function carregarDatas(chaleKey) {
     state.carregando = true;
     elLoading.hidden = false;
-    elError.hidden   = true;
-    elWrap.hidden    = true;
+    elError.hidden = true;
+    elWrap.hidden = true;
 
     // Em ambiente local (file:// ou sem PHP), usa mock direto
     // Permite que o localhost e 127.0.0.1 executem o PHP
-const isLocal = location.protocol === "file:";
+    const isLocal = location.protocol === "file:";
 
     try {
       if (isLocal) throw new Error("local"); // força fallback mock em dev local
 
       const controller = new AbortController();
       const timeout = setTimeout(() => controller.abort(), 6000);
-const res = await fetch(`api/disponibilidade.php?chale=${chaleKey}&meses=4&t=${Date.now()}`, { signal: controller.signal });
+      const res = await fetch(`api/disponibilidade.php?chale=${chaleKey}&meses=4&t=${Date.now()}`, { signal: controller.signal });
       clearTimeout(timeout);
 
       if (!res.ok) throw new Error("HTTP " + res.status);
@@ -436,7 +448,7 @@ const res = await fetch(`api/disponibilidade.php?chale=${chaleKey}&meses=4&t=${D
 
     state.carregando = false;
     elLoading.hidden = true;
-    elWrap.hidden    = false;
+    elWrap.hidden = false;
     renderCalendario();
   }
 
@@ -461,7 +473,7 @@ const res = await fetch(`api/disponibilidade.php?chale=${chaleKey}&meses=4&t=${D
     const ano = refDate.getFullYear();
     const mes = refDate.getMonth();
     const primeiroDia = new Date(ano, mes, 1);
-    const ultimoDia  = new Date(ano, mes + 1, 0);
+    const ultimoDia = new Date(ano, mes + 1, 0);
 
     const wrap = document.createElement("div");
     wrap.className = "cal-month";
@@ -492,7 +504,7 @@ const res = await fetch(`api/disponibilidade.php?chale=${chaleKey}&meses=4&t=${D
     /* Dias do mês */
     for (let dia = 1; dia <= ultimoDia.getDate(); dia++) {
       const data = new Date(ano, mes, dia);
-      const iso  = isoDate(data);
+      const iso = isoDate(data);
       const cell = document.createElement("div");
       cell.className = "cal-day";
       cell.textContent = dia;
@@ -501,17 +513,17 @@ const res = await fetch(`api/disponibilidade.php?chale=${chaleKey}&meses=4&t=${D
       const agora = hoje();
 
       if (data < agora) {
-  cell.classList.add("cal-day--passado");
-} else if (state.datas[iso] === "indisponivel") {
-  cell.classList.add("cal-day--indisponivel");
-  if (sameDay(data, agora)) cell.classList.add("cal-day--hoje");
-} else {
-  cell.classList.add("cal-day--disponivel");
-  if (sameDay(data, agora)) cell.classList.add("cal-day--hoje");
-}
+        cell.classList.add("cal-day--passado");
+      } else if (state.datas[iso] === "indisponivel") {
+        cell.classList.add("cal-day--indisponivel");
+        if (sameDay(data, agora)) cell.classList.add("cal-day--hoje");
+      } else {
+        cell.classList.add("cal-day--disponivel");
+        if (sameDay(data, agora)) cell.classList.add("cal-day--hoje");
+      }
 
       /* Marcação de seleção */
-      if (sameDay(data, state.checkin))  cell.classList.add("cal-day--checkin");
+      if (sameDay(data, state.checkin)) cell.classList.add("cal-day--checkin");
       if (sameDay(data, state.checkout)) cell.classList.add("cal-day--checkout");
       if (state.checkin && state.checkout && between(data, state.checkin, state.checkout)) {
         /* verifica se há bloqueado no range */
@@ -540,20 +552,20 @@ const res = await fetch(`api/disponibilidade.php?chale=${chaleKey}&meses=4&t=${D
 
     /* Se não tem checkin ou já tem os dois, inicia nova seleção */
     if (!state.checkin || (state.checkin && state.checkout)) {
-      state.checkin  = data;
+      state.checkin = data;
       state.checkout = null;
     } else {
       /* Já tem checkin, escolhe checkout */
       if (data <= state.checkin) {
         /* Clicou antes ou no mesmo dia — reinicia */
-        state.checkin  = data;
+        state.checkin = data;
         state.checkout = null;
       } else {
         /* Verifica se há datas bloqueadas entre checkin e data */
         const hasBloqueado = rangeTemBloqueado(state.checkin, data);
         if (hasBloqueado) {
           /* Reinicia a partir daqui */
-          state.checkin  = data;
+          state.checkin = data;
           state.checkout = null;
         } else {
           state.checkout = data;
@@ -599,7 +611,7 @@ const res = await fetch(`api/disponibilidade.php?chale=${chaleKey}&meses=4&t=${D
   function updateFooter() {
     const completo = state.checkin && state.checkout;
     elFooter.hidden = !completo;
-    elHint.hidden   = !!completo;
+    elHint.hidden = !!completo;
   }
 
   /* ── Navegação de meses ──────────────────────────── */
@@ -621,7 +633,7 @@ const res = await fetch(`api/disponibilidade.php?chale=${chaleKey}&meses=4&t=${D
 
   /* ── Limpar ──────────────────────────────────────── */
   document.getElementById("cal-clear")?.addEventListener("click", () => {
-    state.checkin  = null;
+    state.checkin = null;
     state.checkout = null;
     renderCalendario();
     updateFooter();
@@ -632,11 +644,11 @@ const res = await fetch(`api/disponibilidade.php?chale=${chaleKey}&meses=4&t=${D
 
   /* ── Abrir modal ─────────────────────────────────── */
   function openModal(chaleName, chaleKey) {
-    state.chaleName   = chaleName || "Chalé";
-    state.chaleKey    = chaleKey || "sol";
-    state.checkin     = null;
-    state.checkout    = null;
-    state.viewOffset  = 0;
+    state.chaleName = chaleName || "Chalé";
+    state.chaleKey = chaleKey || "sol";
+    state.checkin = null;
+    state.checkout = null;
+    state.viewOffset = 0;
 
     if (elEyebrow) elEyebrow.textContent = chaleName || "Calendário";
     elFooter.hidden = true;
@@ -677,11 +689,13 @@ const res = await fetch(`api/disponibilidade.php?chale=${chaleKey}&meses=4&t=${D
     if (!state.checkin || !state.checkout) return;
 
     const hStr = state.hospedes === 1 ? "1 hóspede" : `${state.hospedes} hóspedes`;
+
+    // Utilizar formato de horário com minutos (:00) evita conflitos de parser no WhatsApp
     let msg = `Olá! Gostaria de reservar no Recanto do Sol Chalés.\n\n`;
-    msg += `- Chalé: ${state.chaleName}\n`;
-    msg += `- Check-in: ${fmtBR(state.checkin)} (a partir das 14h)\n`;
-    msg += `- Check-out: ${fmtBR(state.checkout)} (até as 16h)\n`;
-    msg += `- Hóspedes: ${hStr}\n`;
+    msg += `• Chalé: ${state.chaleName}\n`;
+    msg += `• Check-in: ${fmtBR(state.checkin)} (a partir das 14:00)\n`;
+    msg += `• Check-out: ${fmtBR(state.checkout)} (até as 16:00)\n`;
+    msg += `• Hóspedes: ${hStr}\n`;
 
     window.open(waLink(msg), "_blank", "noreferrer");
     closeModal();
@@ -692,65 +706,65 @@ const res = await fetch(`api/disponibilidade.php?chale=${chaleKey}&meses=4&t=${D
 
 /* ---- Dados dos Depoimentos (Adicione no script.js) ---- */
 const DEPOIMENTOS = [
-  { 
-    nome: "Hóspede via Airbnb", 
-    data: "Avaliação verificada", 
-    iniciais: "★", 
-    texto: "A cabana é ainda mais linda pessoalmente. Foi o lugar perfeito para um final de semana especial e romântico, com uma anfitriã atenciosa a todos os detalhes." 
+  {
+    nome: "Hóspede via Airbnb",
+    data: "Avaliação verificada",
+    iniciais: "★",
+    texto: "A cabana é ainda mais linda pessoalmente. Foi o lugar perfeito para um final de semana especial e romântico, com uma anfitriã atenciosa a todos os detalhes."
   },
-  { 
-    nome: "Hóspede via Airbnb", 
-    data: "Estadia recente", 
-    iniciais: "★", 
-    texto: "Lugar incrível! Intimista, romântico e tudo que você procura para um momento a dois. A hidromassagem e a vista são de suspirar." 
+  {
+    nome: "Hóspede via Airbnb",
+    data: "Estadia recente",
+    iniciais: "★",
+    texto: "Lugar incrível! Intimista, romântico e tudo que você procura para um momento a dois. A hidromassagem e a vista são de suspirar."
   },
-  { 
-    nome: "Hóspede via Airbnb", 
-    data: "Avaliação verificada", 
-    iniciais: "★", 
-    texto: "O ambiente é acolhedor, cheio de charme e com uma energia tão leve que dá vontade de ficar ali por horas. Combina perfeitamente a decoração, a vista e o clima tranquilo." 
+  {
+    nome: "Hóspede via Airbnb",
+    data: "Avaliação verificada",
+    iniciais: "★",
+    texto: "O ambiente é acolhedor, cheio de charme e com uma energia tão leve que dá vontade de ficar ali por horas. Combina perfeitamente a decoração, a vista e o clima tranquilo."
   },
-  { 
-    nome: "Hóspede via Airbnb", 
-    data: "Estadia recente", 
-    iniciais: "★", 
-    texto: "O chalé é lindo e espaçoso, com móveis de ótima qualidade e sistema de luzes e som inteligentes. Conta com grande imersão na natureza e uma hidromassagem deliciosa!" 
+  {
+    nome: "Hóspede via Airbnb",
+    data: "Estadia recente",
+    iniciais: "★",
+    texto: "O chalé é lindo e espaçoso, com móveis de ótima qualidade e sistema de luzes e som inteligentes. Conta com grande imersão na natureza e uma hidromassagem deliciosa!"
   },
-  { 
-    nome: "Hóspede via Airbnb", 
-    data: "Avaliação verificada", 
-    iniciais: "★", 
-    texto: "É igualzinho e até melhor do que nas fotos. Amei as florzinhas nos roupões e toalhas. A paisagem é lindíssima e o processo de check-in foi sem burocracia." 
+  {
+    nome: "Hóspede via Airbnb",
+    data: "Avaliação verificada",
+    iniciais: "★",
+    texto: "É igualzinho e até melhor do que nas fotos. Amei as florzinhas nos roupões e toalhas. A paisagem é lindíssima e o processo de check-in foi sem burocracia."
   },
-  { 
-    nome: "Hóspede via Airbnb", 
-    data: "Estadia recente", 
-    iniciais: "★", 
-    texto: "Lugar impecável! A anfitriã deixou nossa data especial com o capricho do chalé e a vista incrível. Um ambiente extremamente aconchegante e pensado para o seu bem-estar." 
+  {
+    nome: "Hóspede via Airbnb",
+    data: "Estadia recente",
+    iniciais: "★",
+    texto: "Lugar impecável! A anfitriã deixou nossa data especial com o capricho do chalé e a vista incrível. Um ambiente extremamente aconchegante e pensado para o seu bem-estar."
   },
-  { 
-    nome: "Hóspede via Airbnb", 
-    data: "Avaliação verificada", 
-    iniciais: "★", 
-    texto: "Um lugar que transmite paz e descanso do início ao fim. O chalé é muito novo, limpo e dá para perceber o carinho em cada detalhe, desde a chegada até a vista." 
+  {
+    nome: "Hóspede via Airbnb",
+    data: "Avaliação verificada",
+    iniciais: "★",
+    texto: "Um lugar que transmite paz e descanso do início ao fim. O chalé é muito novo, limpo e dá para perceber o carinho em cada detalhe, desde a chegada até a vista."
   },
-  { 
-    nome: "Hóspede via Airbnb", 
-    data: "Estadia recente", 
-    iniciais: "★", 
-    texto: "Local muito tranquilo e privado. A atenção da Enaiara é um diferencial, com todos os itens novos e organizados. Recomendamos e com certeza voltaremos." 
+  {
+    nome: "Hóspede via Airbnb",
+    data: "Estadia recente",
+    iniciais: "★",
+    texto: "Local muito tranquilo e privado. A atenção da Enaiara é um diferencial, com todos os itens novos e organizados. Recomendamos e com certeza voltaremos."
   },
-  { 
-    nome: "Hóspede via Airbnb", 
-    data: "Avaliação verificada", 
-    iniciais: "★", 
-    texto: "Parecia que estávamos em uma cena de filme. Mesmo sendo perto de Curitiba e de fácil acesso, a sensação é de estar em um lugar distante no meio da natureza." 
+  {
+    nome: "Hóspede via Airbnb",
+    data: "Avaliação verificada",
+    iniciais: "★",
+    texto: "Parecia que estávamos em uma cena de filme. Mesmo sendo perto de Curitiba e de fácil acesso, a sensação é de estar em um lugar distante no meio da natureza."
   },
-  { 
-    nome: "Hóspede via Airbnb", 
-    data: "Estadia recente", 
-    iniciais: "★", 
-    texto: "Uma experiência indescritível. Ficamos muito bem acomodados com duas crianças, que adoraram a casinha na árvore, o lago e a fogueira. Acesso muito fácil." 
+  {
+    nome: "Hóspede via Airbnb",
+    data: "Estadia recente",
+    iniciais: "★",
+    texto: "Uma experiência indescritível. Ficamos muito bem acomodados com duas crianças, que adoraram a casinha na árvore, o lago e a fogueira. Acesso muito fácil."
   }
 ];
 
@@ -760,7 +774,7 @@ function initDepoimentosCarousel() {
   const track = document.getElementById("depoimentos-track");
   const dotsContainer = document.getElementById("depoimentos-dots");
   const wrapper = document.getElementById("depoimentos-carousel");
-  
+
   if (!track || !dotsContainer) return;
 
   // 1. Renderizar os cards estruturalmente
@@ -831,7 +845,7 @@ function initDepoimentosCarousel() {
   function nextSlide() {
     const itemsPerView = getItemsPerView();
     const maxIndex = Math.max(0, DEPOIMENTOS.length - itemsPerView);
-    
+
     if (currentIndex >= maxIndex) {
       currentIndex = 0;
     } else {
@@ -878,7 +892,7 @@ function initDepoimentosCarousel() {
   wrapper.addEventListener("touchstart", (e) => {
     clearInterval(autoPlayInterval);
     startX = e.touches[0].clientX;
-    currentX = startX; 
+    currentX = startX;
   }, { passive: true });
 
   wrapper.addEventListener("touchmove", (e) => {
@@ -930,12 +944,12 @@ document.addEventListener("DOMContentLoaded", () => {
   initLinks();
   initActiveNav();
   initModal();
-  
-  
+
+
   /* Inicializa a injeção e o funcionamento do carrossel */
   if (typeof initDepoimentosCarousel === "function") {
-    initDepoimentosCarousel(); 
-  } 
+    initDepoimentosCarousel();
+  }
 
   initParallax();
 });
@@ -966,7 +980,7 @@ function initParallax() {
       // 0.4 na imagem: ela desce enquanto a tela sobe, movendo-se em uma velocidade diferente.
       // 0.15 no texto: leve atraso que destaca a profundidade em relação à imagem.
       heroImg.style.transform = `scale(1) translateY(${scrollY * 0.4
-      }px)`;
+        }px)`;
       heroContent.style.transform = `translateY(${scrollY * 0.15}px)`;
     });
   });

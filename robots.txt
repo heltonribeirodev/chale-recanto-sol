@@ -1,6 +1,11 @@
+# Recanto do Sol Chalés — robots.txt
+# https://chalerecantodosol.com.br
+
 User-agent: *
 Allow: /
-Disallow: /api/
-Disallow: /assets/js/
 
+# Bloqueia apenas a API interna (dados de disponibilidade)
+Disallow: /api/
+
+# Sitemap
 Sitemap: https://chalerecantodosol.com.br/sitemap.xml

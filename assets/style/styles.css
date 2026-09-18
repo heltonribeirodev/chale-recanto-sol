@@ -1285,6 +1285,168 @@ p {
   gap: 48px;
 }
 
+/* Badge WhatsApp */
+.whats-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.whats-badge {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  color: rgba(240, 235, 224, .5);
+  padding-left: 2px;
+}
+
+.whats-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--whats);
+  box-shadow: 0 0 0 3px rgba(31, 174, 86, .2);
+  animation: whats-pulse 2.2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes whats-pulse {
+  0%, 100% { box-shadow: 0 0 0 3px rgba(31, 174, 86, .2); }
+  50%       { box-shadow: 0 0 0 6px rgba(31, 174, 86, 0); }
+}
+
+/* Airbnb */
+.airbnb-chales {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.airbnb-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.airbnb-divider::before,
+.airbnb-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, .1);
+}
+
+.airbnb-divider span {
+  font-size: 11px;
+  color: rgba(240, 235, 224, .4);
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  font-weight: 600;
+}
+
+.airbnb-chale {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  transition: background .2s ease, border-color .2s ease;
+}
+
+.airbnb-chale:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, .18);
+}
+
+.airbnb-chale-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.airbnb-chale-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 16px;
+}
+
+.airbnb-chale-icon.bosque {
+  background: rgba(46, 107, 69, .4);
+  color: #7dcf96;
+}
+
+.airbnb-chale-icon.sol {
+  background: rgba(184, 146, 46, .3);
+  color: var(--gold-light);
+}
+
+.airbnb-chale-info div {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.airbnb-chale-info strong {
+  font-size: 13.5px;
+}
+
+.airbnb-chale-info span {
+  font-size: 11px;
+  opacity: 0.55;
+}
+
+.airbnb-btn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 13px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 9px;
+  color: inherit;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 600;
+  transition: background .2s ease, border-color .2s ease, transform .15s ease;
+  white-space: nowrap;
+}
+
+.airbnb-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, .28);
+  transform: translateY(-1px);
+}
+
+.airbnb-btn i {
+  font-size: 10px;
+  opacity: .7;
+}
+
+@media (max-width: 600px) {
+
+  .airbnb-chale {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .airbnb-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+}
+
 @media (min-width: 900px) {
   .reservas-grid {
     grid-template-columns: 1fr 1fr;
@@ -1347,34 +1509,44 @@ p {
   display: flex;
   flex-direction: column;
   gap: 18px;
+  border-top: 2px solid var(--gold);
+}
+
+.reservas-eyebrow {
+  color: var(--gold-light) !important;
+  opacity: 1 !important;
 }
 
 .reservas-cta h3 {
   font-family: 'Fraunces', serif;
   font-size: 1.75rem;
   color: #fff;
+  margin-top: -4px;
 }
 
 .reservas-cta p {
   font-size: .95rem;
-  color: rgba(240, 235, 224, .75);
+  color: rgba(240, 235, 224, .7);
+  line-height: 1.6;
 }
 
 .reservas-links {
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
 }
 
 .reservas-links .btn-outline-dark {
-  background: rgba(255, 255, 255, .06);
-  border-color: rgba(255, 255, 255, .18);
+  background: rgba(255, 255, 255, .05);
+  border-color: rgba(255, 255, 255, .14);
   color: var(--forest-text);
+  justify-content: center;
+  transition: background .2s ease, border-color .2s ease;
 }
 
 .reservas-links .btn-outline-dark:hover {
-  background: rgba(255, 255, 255, .12);
-  border-color: rgba(255, 255, 255, .3);
+  background: rgba(255, 255, 255, .1);
+  border-color: rgba(255, 255, 255, .28);
 }
 
 .airbnb-note {
@@ -2173,12 +2345,13 @@ footer {
 
   /* Empilha os botões de reserva para facilitar o toque (Touch Target) */
   .reservas-links {
-    flex-direction: column;
-    gap: 14px;
+    grid-template-columns: 1fr;
+    gap: 10px;
   }
 
   .reservas-links .btn {
     width: 100%;
+    justify-content: center;
   }
 
   /* Empilha os direitos autorais e cria uma margem para o botão do WhatsApp */
@@ -2278,22 +2451,7 @@ footer {
   }
 }
 
-/* Localize o Estágio 2 nas suas Media Queries e atualize a classe .reservas-links */
 
-@media (max-width: 768px) {
-  /* ... regras anteriores do footer ... */
-
-  /* Empilha os botões de reserva para facilitar o toque (Touch Target) */
-  .reservas-links {
-    flex-direction: column;
-    gap: 14px;
-    /* Ajuste: Cria o espaçamento vertical entre os botões */
-  }
-
-  .reservas-links .btn {
-    width: 100%;
-  }
-}
 
 
 /* ============================================================

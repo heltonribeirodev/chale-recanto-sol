@@ -1,18 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- Página Inicial (Prioridade Máxima) -->
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <!-- Página principal -->
   <url>
     <loc>https://chalerecantodosol.com.br/</loc>
-    <lastmod>2026-09-14</lastmod>
+    <lastmod>2026-09-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+
+    <!-- Imagem principal (drone pôr do sol) -->
+    <image:image>
+      <image:loc>https://chalerecantodosol.com.br/assets/img/sol/drone2.webp</image:loc>
+      <image:title>Recanto do Sol Chalés — Vista aérea ao pôr do sol em Colombo-PR</image:title>
+      <image:caption>Chalés românticos a 30 minutos de Curitiba, com hidromassagem e lareira</image:caption>
+    </image:image>
+
+    <!-- Chalé Pôr do Sol -->
+    <image:image>
+      <image:loc>https://chalerecantodosol.com.br/assets/img/sol/sol-exterior-dia.webp</image:loc>
+      <image:title>Chalé Pôr do Sol — exterior ao entardecer</image:title>
+    </image:image>
+
+    <!-- Chalé Recanto do Bosque -->
+    <image:image>
+      <image:loc>https://chalerecantodosol.com.br/assets/img/bosque/bosque-exterior-dia.webp</image:loc>
+      <image:title>Chalé Recanto do Bosque — exterior com natureza ao redor</image:title>
+    </image:image>
+
   </url>
-  
+
   <!-- Página de Links da Bio -->
   <url>
     <loc>https://chalerecantodosol.com.br/links.html</loc>
-    <lastmod>2026-09-14</lastmod>
+    <lastmod>2026-09-17</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.5</priority>
   </url>
+
 </urlset>

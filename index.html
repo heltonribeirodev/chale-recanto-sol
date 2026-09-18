@@ -4,46 +4,90 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Recanto do Sol Chalés | Hidromassagem, lareira e pôr do sol no alto do morro</title>
-  <meta name="description"
-    content="Procurando chalés em Curitiba e região? Conheça o Recanto do Sol em Colombo: hidromassagem, lareira e natureza para um final de semana romântico. Reserve!" />
-  <link rel="icon" type="image/png" href="assets/img/logo/logo-png.png" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-  <!-- Preload fontes críticas -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preload" as="style"
-    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&display=swap" />
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&display=swap" />
-  <meta name="theme-color" content="#faf7f2" />
-  <link rel="stylesheet" href="assets/style/styles.css" />
 
-  <!-- Controle de Rastreio do Google -->
-  <meta name="robots" content="index, follow" />
+  <!-- ═══════════════════════════════════════════════
+       GOOGLE ANALYTICS 4
+       Substitua G-XXXXXXXXXX pelo seu Measurement ID
+       em analytics.google.com → Admin → Data Streams
+       ═══════════════════════════════════════════════ -->
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-P6QXDR05RG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-P6QXDR05RG');
+  </script>
+
+  <!-- ═══════════════════════
+       SEO BÁSICO
+       ═══════════════════════ -->
+  <title>Chalé Romântico em Colombo-PR | Recanto do Sol Chalés</title>
+
+  <meta name="description"
+    content="Chalés românticos a 30 min de Curitiba, em Colombo-PR. Hidromassagem, lareira e vista para o pôr do sol no alto do morro. Reserve pelo WhatsApp ou Airbnb." />
+
+  <meta name="keywords"
+    content="chalé romântico Colombo PR, chalé perto de Curitiba, chalé hidromassagem Curitiba, chalé casal Paraná, recanto do sol chalés, chalé com lareira Curitiba, hospedagem romântica Colombo, chalé natureza Colombo" />
+
+  <meta name="author" content="Recanto do Sol Chalés" />
+
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+
   <link rel="canonical" href="https://chalerecantodosol.com.br/" />
 
-  <!-- Open Graph (Gera o card de imagem no WhatsApp, Facebook e Instagram Direct) -->
+  <!-- ═══════════════════════
+       GEO TAGS (Busca local)
+       ═══════════════════════ -->
+  <meta name="geo.region" content="BR-PR" />
+  <meta name="geo.placename" content="Colombo, Paraná, Brasil" />
+  <meta name="geo.position" content="-25.2921;-49.2236" />
+  <meta name="ICBM" content="-25.2921, -49.2236" />
+
+  <!-- ═══════════════════════
+       OPEN GRAPH
+       ═══════════════════════ -->
   <meta property="og:type" content="website" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:site_name" content="Recanto do Sol Chalés" />
   <meta property="og:url" content="https://chalerecantodosol.com.br/" />
-  <meta property="og:title" content="Recanto do Sol Chalés | Perto de Curitiba" />
-  <meta property="og:description" content="Procurando chalés em Curitiba e região? Conheça o Recanto do Sol em Colombo: hidromassagem, lareira e natureza. Reserve!" />
+  <meta property="og:title" content="Chalé Romântico em Colombo-PR | Recanto do Sol Chalés" />
+  <meta property="og:description"
+    content="Chalés românticos a 30 min de Curitiba, em Colombo-PR. Hidromassagem, lareira e vista para o pôr do sol no alto do morro. Reserve!" />
   <meta property="og:image" content="https://chalerecantodosol.com.br/assets/img/sol/drone2.webp" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Chalé Recanto do Sol ao pôr do sol em Colombo-PR" />
 
-  <!-- Twitter Cards (X e pré-visualizações em outros apps) -->
+  <!-- ═══════════════════════
+       TWITTER / X CARDS
+       ═══════════════════════ -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Recanto do Sol Chalés | Perto de Curitiba" />
-  <meta name="twitter:description" content="Procurando chalés em Curitiba e região? Conheça o Recanto do Sol em Colombo: hidromassagem, lareira e natureza. Reserve!" />
+  <meta name="twitter:title" content="Chalé Romântico em Colombo-PR | Recanto do Sol Chalés" />
+  <meta name="twitter:description"
+    content="Chalés românticos a 30 min de Curitiba, em Colombo-PR. Hidromassagem, lareira e vista para o pôr do sol." />
   <meta name="twitter:image" content="https://chalerecantodosol.com.br/assets/img/sol/drone2.webp" />
+  <meta name="twitter:image:alt" content="Chalé Recanto do Sol ao pôr do sol em Colombo-PR" />
 
-  <!-- Dados Estruturados (Faz o Google entender que é um negócio local físico) -->
+  <!-- ═══════════════════════════════════════════════════════════
+       DADOS ESTRUTURADOS — Schema.org
+       Google usa isso para exibir endereço, telefone, avaliações
+       e informações de check-in diretamente nos resultados.
+       ═══════════════════════════════════════════════════════════ -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "LodgingBusiness",
     "name": "Recanto do Sol Chalés",
-    "image": "https://chalerecantodosol.com.br/assets/img/sol/drone2.webp",
-    "description": "Procurando chalés em Curitiba e região? Conheça o Recanto do Sol em Colombo: hidromassagem, lareira e natureza.",
+    "url": "https://chalerecantodosol.com.br",
+    "logo": "https://chalerecantodosol.com.br/assets/img/logo/logo-png.png",
+    "image": [
+      "https://chalerecantodosol.com.br/assets/img/sol/drone2.webp",
+      "https://chalerecantodosol.com.br/assets/img/sol/sol-exterior-dia.webp",
+      "https://chalerecantodosol.com.br/assets/img/bosque/bosque-exterior-dia.webp"
+    ],
+    "description": "Chalés românticos a 30 minutos de Curitiba, em Colombo-PR. Hidromassagem, lareira, natureza e vista privilegiada para o pôr do sol.",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "R. Laci de Rezende, 440 - Imbuial",
@@ -52,11 +96,91 @@
       "postalCode": "83403-515",
       "addressCountry": "BR"
     },
-    "telephone": "+5541998023653",
-    "priceRange": "$$$"
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": -25.2921,
+      "longitude": -49.2236
+    },
+    "telephone": "+5541996366554",
+    "priceRange": "$$$",
+    "checkinTime": "14:00",
+    "checkoutTime": "16:00",
+    "numberOfRooms": 2,
+    "amenityFeature": [
+      { "@type": "LocationFeatureSpecification", "name": "Hidromassagem", "value": true },
+      { "@type": "LocationFeatureSpecification", "name": "Lareira", "value": true },
+      { "@type": "LocationFeatureSpecification", "name": "Vista panorâmica", "value": true },
+      { "@type": "LocationFeatureSpecification", "name": "Área externa", "value": true },
+      { "@type": "LocationFeatureSpecification", "name": "Estacionamento gratuito", "value": true },
+      { "@type": "LocationFeatureSpecification", "name": "Wi-Fi", "value": true }
+    ],
+    "hasMap": "https://maps.google.com/?q=R.+Laci+de+Rezende,+440,+Colombo,+PR",
+    "sameAs": [
+      "https://www.instagram.com/recanto_sol_colombo/",
+      "https://www.airbnb.com.br/rooms/1277477003441238955",
+      "https://www.airbnb.com.br/rooms/1211468186262258138"
+    ]
   }
   </script>
-</head>
+
+  <!-- Schema individual: Chalé Recanto do Bosque -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Accommodation",
+    "name": "Chalé Recanto do Bosque",
+    "description": "Chalé para casais com hidromassagem, lareira e imersão na natureza em Colombo-PR.",
+    "url": "https://www.airbnb.com.br/rooms/1277477003441238955",
+    "image": "https://chalerecantodosol.com.br/assets/img/bosque/bosque-exterior-dia.webp",
+    "accommodationCategory": "Chalé",
+    "amenityFeature": [
+      { "@type": "LocationFeatureSpecification", "name": "Hidromassagem", "value": true },
+      { "@type": "LocationFeatureSpecification", "name": "Lareira", "value": true }
+    ],
+    "containedInPlace": {
+      "@type": "LodgingBusiness",
+      "name": "Recanto do Sol Chalés",
+      "url": "https://chalerecantodosol.com.br"
+    }
+  }
+  </script>
+
+  <!-- Schema individual: Chalé Pôr do Sol -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Accommodation",
+    "name": "Chalé Pôr do Sol",
+    "description": "Chalé para casais com hidromassagem, lareira e vista privilegiada para o pôr do sol em Colombo-PR.",
+    "url": "https://www.airbnb.com.br/rooms/1211468186262258138",
+    "image": "https://chalerecantodosol.com.br/assets/img/sol/sol-exterior-dia.webp",
+    "accommodationCategory": "Chalé",
+    "amenityFeature": [
+      { "@type": "LocationFeatureSpecification", "name": "Hidromassagem", "value": true },
+      { "@type": "LocationFeatureSpecification", "name": "Lareira", "value": true },
+      { "@type": "LocationFeatureSpecification", "name": "Vista panorâmica", "value": true }
+    ],
+    "containedInPlace": {
+      "@type": "LodgingBusiness",
+      "name": "Recanto do Sol Chalés",
+      "url": "https://chalerecantodosol.com.br"
+    }
+  }
+  </script>
+
+  <!-- ═══════════════════════
+       ASSETS
+       ═══════════════════════ -->
+  <link rel="icon" type="image/png" href="assets/img/logo/logo-png.png" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style"
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&display=swap" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&display=swap" />
+  <meta name="theme-color" content="#faf7f2" />
+  <link rel="stylesheet" href="assets/style/styles.css" />
 
 <body>
 
@@ -176,12 +300,21 @@
       <div class="historia-text">
         <span class="eyebrow">Nossa história</span>
         <h2>Um paraíso no alto do morro, feito para momentos inesquecíveis</h2>
-        <p>Nossa chácara fica em um canto especial da natureza, onde o céu se encontra com a terra e o sol se despede em
-          um espetáculo de cores. Quando decidimos transformar esse lugar em um espaço de acolhimento, a ideia foi
-          simples: compartilhar essa maravilha com outras pessoas.</p>
-        <p>Cada chalé foi cuidadosamente planejado para que os visitantes desfrutem da vista espetacular do pôr do sol e
-          se conectem com a tranquilidade do ambiente, seja relaxando na varanda privativa ou explorando os arredores.
-        </p>
+        <p>Nossa chácara fica em um lugar especial, cercado pela natureza e privilegiado por um pôr do sol que
+          transforma o céu em um espetáculo de cores. Foi desse cenário que nasceu o desejo de criar um espaço onde
+          outras pessoas também pudessem vivenciar momentos de tranquilidade, conforto e conexão com a natureza.</p>
+
+        <p>Cada chalé foi cuidadosamente planejado para valorizar a paisagem e proporcionar uma experiência acolhedora.
+          As varandas privativas convidam a desacelerar, contemplar o horizonte e aproveitar a paz que o ambiente
+          oferece.</p>
+
+        <p>A construção dos chalés no alto do morro também representa nosso cuidado em preservar e valorizar o entorno
+          natural. Mais do que uma hospedagem, queremos proporcionar uma experiência em que cada detalhe contribua para
+          momentos especiais e boas lembranças.</p>
+
+        <p>Venha conhecer esse refúgio e descubra um lugar onde a beleza da natureza, o conforto e a tranquilidade se
+          encontram.</p>
+
         <a class="btn btn-outline" href="#chales">Conhecer os chalés</a>
       </div>
     </div>
@@ -382,59 +515,148 @@
   <!-- RESERVAS -->
   <section id="reservas" class="section section-sand">
     <div class="container reservas-grid">
+
       <div class="reservas-info" data-reveal="left">
         <span class="eyebrow">Política de reservas</span>
+
         <h2>Simples e sem burocracia</h2>
-        <p class="muted">Para garantir sua reserva, solicitamos um depósito de 30% do valor total no momento da
-          confirmação. O restante é pago no check-in.</p>
+
+        <p class="muted">
+          Para garantir sua reserva, solicitamos um depósito de 30% do valor total
+          no momento da confirmação. O restante é pago no check-in.
+        </p>
+
         <div class="pagamentos">
+
           <div class="pagamento-item">
             <div class="pagamento-num">30%</div>
+
             <div>
               <strong>Na reserva</strong>
               <p>Via Pix ou link de pagamento (com taxas).</p>
             </div>
           </div>
+
           <div class="pagamento-item">
             <div class="pagamento-num">70%</div>
+
             <div>
               <strong>No check-in</strong>
-              <p>Dinheiro, Pix, link ou cartão de crédito parcelado (sujeito a taxas).</p>
+              <p>
+                Dinheiro, Pix, link ou cartão de crédito parcelado
+                (sujeito a taxas).
+              </p>
             </div>
           </div>
+
         </div>
+
         <p class="checkin-info">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <circle cx="12" cy="12" r="10" />
             <polyline points="12 6 12 12 16 14" />
           </svg>
+
           Check-in a partir das 14h · Check-out até 16h
         </p>
       </div>
+
+
       <div class="reservas-cta" data-reveal="right">
+
+        <span class="eyebrow reservas-eyebrow">Disponibilidade</span>
+
         <h3>Consulte a disponibilidade</h3>
-        <p>Fins de semana e feriados costumam esgotar rapidamente. Fale com a gente pelo WhatsApp e garanta suas datas.
+
+        <p>
+          Escolha seu chalé e consulte as datas disponíveis.
+          Para reservas diretas, fale com a gente pelo WhatsApp.
         </p>
-        <a class="btn btn-whats btn-lg" id="reservas-whats" target="_blank" rel="noreferrer">
-          <i class="fa-brands fa-whatsapp fa-lg"></i>
-          Reservar pelo WhatsApp
-        </a>
+
+
+        <!-- WHATSAPP -->
+        <div class="whats-wrap">
+          <a class="btn btn-whats btn-lg" id="reservas-whats" target="_blank" rel="noreferrer">
+            <i class="fa-brands fa-whatsapp fa-lg"></i>
+            Reservar pelo WhatsApp
+          </a>
+          <span class="whats-badge">
+            <span class="whats-dot"></span>
+            Responde rápido
+          </span>
+        </div>
+
+
+        <!-- LINKS PRINCIPAIS -->
         <div class="reservas-links">
+
           <a class="btn btn-outline-dark" id="link-instagram" target="_blank" rel="noreferrer">
             <i class="fa-brands fa-instagram"></i>
             Instagram
           </a>
+
           <a class="btn btn-outline-dark" id="link-maps" target="_blank" rel="noreferrer">
             <i class="fa-solid fa-location-dot"></i>
             Como chegar
           </a>
-          <a class="btn btn-outline-dark" id="link-airbnb" target="_blank" rel="noreferrer">
-            <i class="fa-brands fa-airbnb"></i>
-            Airbnb
-          </a>
+
         </div>
-        <p class="airbnb-note">Também disponível no <strong>Airbnb</strong> — pesquise por "Recanto do Sol Chalés"</p>
+
+
+        <!-- CHALÉS NO AIRBNB -->
+        <div class="airbnb-chales">
+
+          <div class="airbnb-divider">
+            <span>ou reserve pelo Airbnb</span>
+          </div>
+
+          <div class="airbnb-chale">
+
+            <div class="airbnb-chale-info">
+              <div class="airbnb-chale-icon bosque">
+                <i class="fa-solid fa-tree"></i>
+              </div>
+
+              <div>
+                <strong>Chalé Recanto do Bosque</strong>
+                <span>Natureza, hidromassagem e tranquilidade</span>
+              </div>
+            </div>
+
+            <a href="https://www.airbnb.com.br/rooms/1277477003441238955" target="_blank" rel="noreferrer"
+              class="airbnb-btn">
+              Ver no Airbnb
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+
+          </div>
+
+
+          <div class="airbnb-chale">
+
+            <div class="airbnb-chale-info">
+              <div class="airbnb-chale-icon sol">
+                <i class="fa-solid fa-sun"></i>
+              </div>
+
+              <div>
+                <strong>Chalé Pôr do Sol</strong>
+                <span>Conforto, natureza e vista privilegiada</span>
+              </div>
+            </div>
+
+            <a href="https://www.airbnb.com.br/rooms/1211468186262258138" target="_blank" rel="noreferrer"
+              class="airbnb-btn">
+              Ver no Airbnb
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+
+          </div>
+
+        </div>
+
       </div>
+
     </div>
   </section>
 
@@ -448,7 +670,7 @@
         <div class="social-links">
           <a href="https://www.instagram.com/recanto_sol_colombo/" aria-label="Instagram" target="_blank"><i
               class="fa-brands fa-instagram"></i></a>
-          <a href="https://wa.me/5541996366554?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20Refúgio%20da%20Mata."
+          <a href="https://wa.me/5541998023653?text=Olá!%20Quero%20saber%20mais%20sobre%20os%20chalés%20Recanto%20do%20Sol."
             aria-label="WhatsApp" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i></a>
           <a href="https://www.airbnb.com.br/s/recanto-do-sol-colombo/homes?refinement_paths%5B%5D=%2Fhomes&date_picker_type=calendar&search_type=search_query"
             aria-label="Airbnb" target="_blank"><i class="fa-brands fa-airbnb"></i></a>
@@ -477,7 +699,7 @@
         <h4>Contato</h4>
         <p><i class="fa-solid fa-location-dot"></i> R. Laci de Rezende, 440 - Imbuial, Colombo - PR, 83403-515</p>
         <p>
-          <a href="https://wa.me/5541996366554?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20Refúgio%20da%20Mata."
+          <a href="https://wa.me/5541998023653?text=Olá!%20Quero%20saber%20mais%20sobre%20os%20chalés%20Recanto%20do%20Sol."
             target="_blank" rel="noopener" class="footer-tel-wpp">
             <i class="fa-brands fa-whatsapp"></i> (41) 9 9876-5678
           </a>

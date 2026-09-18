@@ -1,136 +1,137 @@
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&display=swap');
 
+/* ── Variáveis idênticas ao site principal ── */
 :root {
-  --cream: #F4EBDC;
-  --amber: #D98A4A;
-  --terracotta: #B15C3B;
-  --forest: #2E4636;
-  --bark: #5C4433;
-  --bg: #faf7f2;
-  --gold-light: #d4a843;
-  --gold: #b8922e; /* Variável adicionada para o scrollbar */
+  --bg:           #faf7f2;
+  --bg-sand:      #f2ebe0;
+  --fg:           #2a2018;
+  --fg-muted:     #7a6e61;
+  --card-bg:      #ffffff;
+  --border:       #e3d9cc;
+  --gold:         #b8922e;
+  --gold-light:   #d4a843;
+  --rust:         #b85530;
+  --whats:        #1fae56;
+  --forest-text:  #f0ebe0;
+  --radius:       18px;
+  --radius-lg:    28px;
+  --shadow:       0 2px 12px rgba(42,32,24,.06), 0 16px 40px -20px rgba(42,32,24,.25);
+  --shadow-lg:    0 8px 40px rgba(42,32,24,.18);
+  --transition:   .4s cubic-bezier(.4,0,.2,1);
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box
-}
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+img { display: block; max-width: 100%; }
+a   { color: inherit; text-decoration: none; }
 
+/* ── Scrollbar (idêntica ao site) ── */
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 72px;
   scrollbar-width: thin;
   scrollbar-color: var(--gold-light) transparent;
 }
-
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--bg);
-  /* Usa o fundo off-white do site */
-}
-
+::-webkit-scrollbar       { width: 10px; }
+::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb {
   background-color: var(--gold-light);
-  /* Tom dourado principal */
   border-radius: 99px;
-  /* Arredondamento elegante */
   border: 2px solid var(--bg);
-  /* Cria uma margem interna invisível para a barra parecer mais fina */
 }
+::-webkit-scrollbar-thumb:hover { background-color: var(--gold); }
 
-::-webkit-scrollbar-thumb:hover {
-  background-color: var(--gold);
-  /* Dourado mais escuro ao passar o mouse */
-}
-
+/* ── Base ── */
 body {
-  background: var(--cream);
-  color: var(--bark);
-  font-family: "Fraunces", system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 1rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
   display: flex;
   flex-direction: column;
   align-items: center;
   min-height: 100dvh;
 }
 
+/* ── Layout ── */
 .wrap {
   width: 100%;
-  max-width: 28rem;
+  max-width: 26rem;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1rem 1.5rem 1rem;
+  padding: 2.5rem 1.5rem 1rem;
 }
 
-.avatar-box {
-  position: relative
-}
+/* ── Avatar ── */
+.avatar-box { position: relative; }
 
 .avatar {
-  width: 7rem;
-  height: 7rem;
+  width: 6.5rem;
+  height: 6.5rem;
   border-radius: 9999px;
   object-fit: cover;
-  display: block;
-  outline: 1px solid rgba(92, 68, 51, .1);
-  outline-offset: -1px;
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  box-shadow: var(--shadow);
 }
 
 .badge {
   position: absolute;
-  bottom: -.25rem;
+  bottom: -.3rem;
   left: 50%;
   transform: translateX(-50%);
-  background: var(--forest);
-  color: var(--cream);
+  background: var(--fg);
+  color: var(--forest-text);
+  font-family: 'DM Sans', sans-serif;
   font-size: 9px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: .2em;
   text-transform: uppercase;
-  padding: .25rem .75rem;
+  padding: .25rem .85rem;
   border-radius: 9999px;
   white-space: nowrap;
-  box-shadow: 0 0 0 1px rgba(92, 68, 51, .2);
+  border-top: 1px solid var(--gold);
 }
 
+/* ── Textos de cabeçalho ── */
 h1 {
-  font-family: "Fraunces", Georgia, serif;
+  font-family: 'Fraunces', Georgia, serif;
   font-weight: 500;
   font-size: 2.25rem;
-  line-height: 1;
+  line-height: 1.1;
   text-align: center;
   margin-top: 1.5rem;
+  letter-spacing: -.01em;
 }
 
 .subtitle {
-  font-family: "Fraunces", Georgia, serif;
+  font-family: 'Fraunces', Georgia, serif;
   font-style: italic;
-  font-size: 1.125rem;
-  color: var(--terracotta);
+  font-size: 1.05rem;
+  color: var(--gold);
   text-align: center;
   margin-top: .25rem;
 }
 
 .bio {
   font-size: .875rem;
-  line-height: 1.625;
-  color: rgba(92, 68, 51, .7);
+  line-height: 1.7;
+  color: var(--fg-muted);
   text-align: center;
   max-width: 32ch;
-  margin-top: 1rem;
+  margin-top: .875rem;
 }
 
+/* ── Cards ── */
 .links {
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: .75rem;
-  margin-top: 2.25rem
+  margin-top: 2rem;
 }
 
 .card {
@@ -138,18 +139,21 @@ h1 {
   align-items: center;
   gap: 1rem;
   padding: 1rem 1.25rem;
-  border-radius: .75rem;
-  box-shadow: 0 0 0 1px rgba(92, 68, 51, .1);
+  border-radius: var(--radius);
   text-decoration: none;
-  color: inherit;
-  transition: transform .2s ease, box-shadow .2s ease;
+  color: var(--forest-text);
+  background: var(--fg);
+  border-top: 2px solid var(--gold);
+  box-shadow: var(--shadow);
+  transition: transform var(--transition), box-shadow var(--transition);
 }
 
 .card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px -8px rgba(92, 68, 51, .35), 0 0 0 1px rgba(92, 68, 51, .12)
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
 }
 
+/* Ícone quadrado */
 .card .icon {
   flex-shrink: 0;
   width: 2.75rem;
@@ -157,104 +161,100 @@ h1 {
   border-radius: 10px;
   display: grid;
   place-items: center;
+  background: rgba(255,255,255,.07);
+  color: var(--gold-light);
 }
 
 .card img.icon {
   object-fit: cover;
-  box-shadow: 0 0 0 1px rgba(244, 235, 220, .3)
+  box-shadow: none;
 }
 
-.card .texts {
-  flex: 1;
-  min-width: 0
-}
+/* Textos */
+.card .texts { flex: 1; min-width: 0; }
 
 .card .title {
-  font-family: "Fraunces", Georgia, serif;
-  font-size: 1.125rem;
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 1.05rem;
   font-weight: 500;
-  display: block
+  display: block;
+  color: #fff;
 }
 
 .card .desc {
-  font-size: .875rem;
+  font-size: .8rem;
   display: block;
-  margin-top: .125rem
+  margin-top: .125rem;
+  color: rgba(240,235,224,.55);
 }
 
+/* Seta */
 .card .arrow {
   flex-shrink: 0;
-  font-size: 1.125rem;
-  opacity: .5;
-  transition: transform .2s ease
+  font-size: 1rem;
+  opacity: .45;
+  transition: transform var(--transition);
 }
+.card:hover .arrow { transform: translateX(3px); opacity: .7; }
 
-.card:hover .arrow {
-  transform: translateX(2px)
-}
+/* ── Variações dos cards ── */
 
-.card-site {
-  background: var(--forest);
-  color: var(--cream)
-}
-
+/* Site Oficial — gold accent */
 .card-site .icon {
-  background: rgba(217, 138, 74, .2);
-  color: var(--amber)
+  background: rgba(212,168,67,.18);
+  color: var(--gold-light);
 }
 
-.card-site .desc {
-  color: rgba(244, 235, 220, .6)
-}
-
+/* Chalé Pôr do Sol — rust tint */
 .card-sol {
-  background: var(--terracotta);
-  color: var(--cream)
+  border-top-color: var(--rust);
+}
+.card-sol .icon {
+  background: rgba(184,85,48,.25);
+  color: #e8927a;
 }
 
-.card-sol .desc {
-  color: rgba(244, 235, 220, .65)
-}
-
+/* Chalé Recanto do Bosque — verde tint */
 .card-bosque {
-  background: var(--bark);
-  color: var(--cream)
+  border-top-color: #4d8c68;
+}
+.card-bosque .icon {
+  background: rgba(46,107,69,.35);
+  color: #7dcf96;
 }
 
-.card-bosque .desc {
-  color: rgba(244, 235, 220, .65)
-}
-
+/* WhatsApp — verde vibrante */
 .card-wa {
-  background: var(--amber);
-  color: var(--forest);
-  box-shadow: 0 0 0 1px rgba(92, 68, 51, .2)
+  background: var(--whats);
+  border-top-color: #17913f;
+  color: #fff;
 }
-
 .card-wa .icon {
-  background: rgba(46, 70, 54, .15);
-  color: var(--forest)
+  background: rgba(255,255,255,.15);
+  color: #fff;
 }
+.card-wa .title { color: #fff; }
+.card-wa .desc  { color: rgba(255,255,255,.65); }
+.card-wa .arrow { opacity: .6; }
 
-.card-wa .desc {
-  color: rgba(46, 70, 54, .7)
-}
-
+/* ── Hero image ── */
 .hero {
   width: 100%;
   aspect-ratio: 3/2;
   object-fit: cover;
-  border-radius: .75rem;
-  margin: 2rem 0rem;
-  display: block;
-  outline: 1px solid rgba(92, 68, 51, .1);
+  border-radius: var(--radius);
+  margin: 2rem 0;
+  outline: 1px solid var(--border);
   outline-offset: -1px;
+  box-shadow: var(--shadow);
 }
 
+/* ── Footer ── */
 footer {
-  font-size: .75rem;
-  letter-spacing: .025em;
-  color: rgba(92, 68, 51, .5);
+  font-size: .72rem;
+  letter-spacing: .04em;
+  color: var(--fg-muted);
   text-align: center;
-  margin-bottom: 3rem;
+  padding-bottom: 2.5rem;
+  opacity: .6;
 }
