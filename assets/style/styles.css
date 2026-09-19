@@ -55,7 +55,7 @@ html {
   
   /* CRUCIAL: Trava o eixo horizontal globalmente na raiz */
   overflow-x: hidden;
-  width: 100vw;
+  width: 100%; /* Corrigido de 100vw para 100% para evitar scroll horizontal fantasma */
   max-width: 100%;
 }
 
@@ -65,21 +65,16 @@ html {
 
 ::-webkit-scrollbar-track {
   background: var(--bg);
-  /* Usa o fundo off-white do site */
 }
 
 ::-webkit-scrollbar-thumb {
   background-color: var(--gold-light);
-  /* Tom dourado principal */
   border-radius: 99px;
-  /* Arredondamento elegante */
   border: 2px solid var(--bg);
-  /* Cria uma margem interna invisível para a barra parecer mais fina */
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background-color: var(--gold);
-  /* Dourado mais escuro ao passar o mouse */
 }
 
 @media (max-width: 768px) {
@@ -87,10 +82,6 @@ html {
     width: 0px; 
     background: transparent; 
   }
-}
-
-::-webkit-scrollbar {
-  width: 10px;
 }
 
 body {
@@ -120,7 +111,7 @@ h1 {
 }
 
 h2 {
-  font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+  font-size: clamp(1.9rem, 4.5vw, 3.4rem);
 }
 
 h3 {
@@ -143,7 +134,7 @@ p {
 }
 
 .section {
-  padding: 96px 0;
+  padding: clamp(56px, 7vw, 96px) 0;
 }
 
 .section-sand {
@@ -283,16 +274,16 @@ p {
   border-color: var(--gold);
 }
 
-/* ----- Navigation (Versão Otimizada) ----- */
+/* ----- Navigation ----- */
 .nav-bar {
-  position: fixed; /* Mudou de sticky para fixed */
+  position: fixed; 
   top: 0;
-  left: 0;         /* Garante o alinhamento no canto esquerdo */
-  width: 100%;     /* Força a barra a ocupar a tela toda */
+  left: 0;         
+  width: 100%;     
   z-index: 100;
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
-  background: rgba(250, 247, 242, .92); /* Mantém a sua cor original */
+  background: rgba(250, 247, 242, .92); 
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid transparent;
@@ -314,22 +305,22 @@ p {
 
 .nav-brand {
   display: flex;
-  flex-direction: row; /* Altera o empilhamento para alinhamento horizontal */
-  align-items: center; /* Centraliza a imagem com os textos no eixo Y */
-  gap: 12px; /* Define um distanciamento seguro entre a imagem e o texto */
-  flex-shrink: 0; /* Preserva o comportamento do flexbox original[cite: 2] */
+  flex-direction: row; 
+  align-items: center; 
+  gap: 12px; 
+  flex-shrink: 0; 
 }
 
 .nav-brand-img {
-  height: 40px; /* Trava a altura para proteger a área de rolagem */
+  height: 40px; 
   width: auto;
   object-fit: contain;
 }
 
 .nav-brand-text {
   display: flex;
-  flex-direction: column; /* Mantém os dois spans empilhados internamente */
-  line-height: 1.2; /* Transfere o line-height original para o grupo de texto[cite: 2] */
+  flex-direction: column; 
+  line-height: 1.2; 
   & span {
     font-family: "Fraunces", serif;
     font-size: 16px;
@@ -351,13 +342,12 @@ p {
   color: var(--fg);
 }
 
-@media (min-width: 900px) {
+@media (min-width: 1024px) {
   .nav-links {
     display: flex;
   }
 }
 
-/* Botão Hamburguer blindado para toque */
 .nav-toggle {
   display: flex;
   flex-direction: column;
@@ -366,11 +356,8 @@ p {
   border: none;
   cursor: pointer;
   padding: 12px;
-  /* Área de toque (Touch Target) aumentada para dedos */
   margin-right: -12px;
-  /* Compensa o padding para manter alinhado à direita */
   touch-action: manipulation;
-  /* Remove o atraso de 300ms do clique no mobile */
   position: relative;
   z-index: 10000;
 }
@@ -396,13 +383,12 @@ p {
   transform: translateY(-7px) rotate(-45deg);
 }
 
-@media (min-width: 900px) {
+@media (min-width: 1024px) {
   .nav-toggle {
     display: none;
   }
 }
 
-/* Menu Flutuante */
 .mobile-menu {
   display: none;
   flex-direction: column;
@@ -411,7 +397,6 @@ p {
   border-top: 1px solid var(--border);
   background: var(--bg);
   position: absolute;
-  /* Menu agora flutua por cima da página ao invés de empurrá-la */
   top: 100%;
   left: 0;
   width: 100%;
@@ -451,8 +436,6 @@ p {
   }
 }
 
-
-
 /* ----- Hero ----- */
 .hero {
   position: relative;
@@ -460,7 +443,6 @@ p {
   display: flex;
   align-items: flex-end;
   overflow: hidden;
-  /* Crucial: impede que a imagem vaze da seção durante o paralaxe */
 }
 
 .hero-media {
@@ -474,9 +456,7 @@ p {
   object-fit: cover;
   object-position: center 30%;
   transform: scale(1.15);
-  /* Margem de segurança: amplia a imagem para ela ter espaço para se mover sem mostrar o fundo branco */
   will-change: transform;
-  /* Aviso para o navegador otimizar a GPU */
 }
 
 .hero-overlay {
@@ -544,29 +524,13 @@ p {
 }
 
 @keyframes scroll-bounce {
-
-  0%,
-  100% {
-    transform: translateX(-50%) translateY(0);
-  }
-
-  50% {
-    transform: translateX(-50%) translateY(6px);
-  }
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(6px); }
 }
 
 @keyframes scroll-dot {
-
-  0%,
-  100% {
-    cy: 8;
-    opacity: .8;
-  }
-
-  50% {
-    cy: 18;
-    opacity: .4;
-  }
+  0%, 100% { cy: 8; opacity: .8; }
+  50% { cy: 18; opacity: .4; }
 }
 
 /* ----- Highlights Bar ----- */
@@ -621,7 +585,7 @@ p {
   gap: 56px;
 }
 
-@media (min-width: 900px) {
+@media (min-width: 1024px) {
   .historia-grid {
     grid-template-columns: 1fr 1fr;
     align-items: center;
@@ -689,16 +653,20 @@ p {
   overflow: hidden;
   box-shadow: var(--shadow);
   margin-bottom: 48px;
+  /* Configuração mobile: empilhado */
+  display: flex;
+  flex-direction: column; 
 }
 
 .chale-card:last-child {
   margin-bottom: 0;
 }
 
-@media (min-width: 900px) {
+@media (min-width: 1024px) {
   .chale-card {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    /* Força exatamente 50/50, previne que a imagem esprema o texto */
+    grid-template-columns: repeat(2, minmax(0, 1fr)); 
   }
 
   .chale-card.reversed .chale-media {
@@ -715,14 +683,13 @@ p {
 .chale-photo-wrap {
   position: relative;
   flex: none;
-  /* CRUCIAL: Impede que o flexbox ignore a altura fixa no celular */
   width: 100%;
-  height: 22rem;
+  /* Usa aspect-ratio em vez de height fixa para não distorcer no mobile */
+  aspect-ratio: 16 / 11; 
 }
 
 .chale-photo-wrap img {
   position: absolute;
-  /* CRUCIAL: A imagem para de ditar a altura do card */
   top: 0;
   left: 0;
   width: 100%;
@@ -731,16 +698,15 @@ p {
   transition: opacity .3s ease;
 }
 
-@media (min-width: 900px) {
+@media (min-width: 1024px) {
   .chale-media {
     height: 100%;
   }
 
   .chale-photo-wrap {
+    aspect-ratio: auto;
     height: auto;
-    /* Libera a altura engessada herdada do mobile */
     flex: 1;
-    /* Mágica do Flexbox: a foto principal preenche exatamente o espaço que sobrar acima das miniaturas */
   }
 }
 
@@ -804,15 +770,17 @@ p {
 }
 
 .chale-info {
-  padding: 36px 32px;
+  /* Reduzido o padding padrão para não espremer em telas menores */
+  padding: 28px 24px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
 }
 
-@media (min-width: 900px) {
+@media (min-width: 1024px) {
   .chale-info {
     padding: 44px 40px;
+    gap: 24px;
   }
 }
 
@@ -821,7 +789,7 @@ p {
 }
 
 .chale-info h3 {
-  font-size: 2.1rem;
+  font-size: clamp(1.6rem, 2.5vw, 2.1rem);
 }
 
 .chale-chamada {
@@ -872,7 +840,6 @@ p {
   font-size: .9rem;
   line-height: 1.6;
   max-width: none;
-  /* Ajuste: remove o limite global da tag <p> para expansão total */
 }
 
 .chale-superior strong {
@@ -904,7 +871,7 @@ p {
 }
 
 .preco-label {
-  font-size: .68rem;
+  font-size: clamp(.58rem, 1vw, .68rem);
   text-transform: uppercase;
   letter-spacing: .14em;
   color: var(--fg-muted);
@@ -913,10 +880,11 @@ p {
 
 .preco-val {
   font-family: 'Fraunces', serif;
-  font-size: 1.5rem;
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
   font-weight: 600;
   margin-top: 4px;
   color: var(--fg);
+  white-space: nowrap;
 }
 
 .preco-item.destaque .preco-val {
@@ -930,7 +898,6 @@ p {
   border-top: 1px solid var(--border);
   background: var(--bg-sand);
   max-width: none;
-  /* Ajuste: garante o preenchimento em toda a base da tabela */
 }
 
 /* ----- Área Externa ----- */
@@ -939,7 +906,7 @@ p {
   gap: 48px;
 }
 
-@media (min-width: 900px) {
+@media (min-width: 1024px) {
   .ext-grid {
     grid-template-columns: 1.1fr 1fr;
     align-items: start;
@@ -949,60 +916,47 @@ p {
 .ext-photos {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  /* Cria duas colunas para as fotos menores */
   gap: 16px;
-  /* Aumenta um pouco o respiro */
 }
 
 .ext-photo-main {
   grid-column: 1 / -1;
-  /* Força a foto principal a ocupar toda a largura (topo) */
   width: 100%;
   height: 22rem;
-  /* Altura levemente reduzida para não tomar a tela toda */
   object-fit: cover;
   border-radius: var(--radius);
   box-shadow: var(--shadow-lg);
-  /* Adiciona profundidade */
 }
 
 .ext-photo-sec {
   width: 100%;
   height: 14rem;
-  /* Altura ideal para as fotos de base */
   object-fit: cover;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
 }
 
-/* Remove o aspecto de "card de aplicativo" e adota um visual editorial */
 .ext-features li {
   display: flex;
   gap: 22px;
   align-items: flex-start;
   padding: 20px 0;
-  /* Remove padding lateral, focando no espaçamento vertical */
   background: transparent;
-  /* Remove o fundo translúcido */
   border: none;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  /* Apenas uma linha divisória elegante na base */
   border-radius: 0;
   transition: transform var(--transition);
 }
 
-/* Remove a linha divisória do último item para um acabamento limpo */
 .ext-features li:last-child {
   border-bottom: none;
 }
 
-/* Interação sutil: deslocamento lateral orgânico em vez de flutuação de card */
 .ext-features li:hover {
   background: transparent;
   transform: translateX(6px);
 }
 
-/* Transforma o contêiner do ícone em algo orgânico */
 .ext-icon {
   display: flex;
   align-items: center;
@@ -1011,15 +965,11 @@ p {
   height: 44px;
   flex-shrink: 0;
   background: transparent;
-  /* Remove o fundo sólido */
   border: 1px solid rgba(212, 168, 67, 0.35);
-  /* Círculo em traço fino dourado */
   border-radius: 50%;
-  /* Formas circulares transmitem mais conforto que quadrados */
   color: var(--gold-light);
 }
 
-/* Mantém a rotação e ampliação originais do hover no ícone */
 .ext-features li:hover .ext-icon {
   transform: scale(1.12) rotate(-3deg);
   border-color: var(--gold-light);
@@ -1133,7 +1083,6 @@ p {
   color: var(--fg-muted);
 }
 
-
 /* * ════════════════════ DEPOIMENTOS ════════════════════ */
 .depoimento-photos {
   display: grid;
@@ -1150,18 +1099,15 @@ p {
 }
 
 .depoimentos {
+  padding-top: clamp(56px, 7vw, 96px);
   padding-bottom: 6rem;
 }
-
-
-/* Adicione no styles.css, substituindo a regra antiga do .depoimentos-grid */
 
 .carousel-wrapper {
   overflow: hidden;
   width: 100%;
   position: relative;
   padding: 10px 0;
-  /* Cria um respiro para a sombra dos cards não cortar */
 }
 
 .carousel-track {
@@ -1171,7 +1117,6 @@ p {
 }
 
 .depoimento-card {
-  /* Largura mobile: 1 card ocupando 100% do espaço disponível */
   flex: 0 0 100%;
   background: var(--card-bg);
   padding: 2rem;
@@ -1182,21 +1127,18 @@ p {
   box-shadow: var(--shadow);
 }
 
-/* Largura Tablet: 2 cards (calculando o espaço descontando o gap) */
 @media (min-width: 640px) {
   .depoimento-card {
     flex: 0 0 calc((100% - 2rem) / 2);
   }
 }
 
-/* Largura Desktop: 4 cards */
 @media (min-width: 1024px) {
   .depoimento-card {
     flex: 0 0 calc((100% - 6rem) / 4);
   }
 }
 
-/* Estilização das bolinhas de paginação */
 .carousel-dots {
   display: flex;
   justify-content: center;
@@ -1209,7 +1151,6 @@ p {
   height: 12px;
   border-radius: 50%;
   background: rgba(42, 32, 24, 0.15);
-  /* Cor sutil de fundo */
   border: none;
   cursor: pointer;
   transition: background var(--transition), transform var(--transition);
@@ -1218,16 +1159,6 @@ p {
 .carousel-dot.active {
   background: var(--gold);
   transform: scale(1.2);
-  /* Destaque na bolinha atual */
-}
-
-.depoimento-card {
-  background: var(--card-bg);
-  padding: 2rem;
-  border-radius: var(--radius);
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
 }
 
 .estrelas {
@@ -1285,7 +1216,6 @@ p {
   gap: 48px;
 }
 
-/* Badge WhatsApp */
 .whats-wrap {
   display: flex;
   flex-direction: column;
@@ -1434,20 +1364,17 @@ p {
 }
 
 @media (max-width: 600px) {
-
   .airbnb-chale {
     align-items: flex-start;
     flex-direction: column;
   }
-
   .airbnb-btn {
     width: 100%;
     justify-content: center;
   }
-
 }
 
-@media (min-width: 900px) {
+@media (min-width: 1024px) {
   .reservas-grid {
     grid-template-columns: 1fr 1fr;
     align-items: start;
@@ -1557,8 +1484,6 @@ p {
 .airbnb-note strong {
   color: rgba(240, 235, 224, .8);
 }
-
-
 
 /* ----- Footer ----- */
 footer {
@@ -1718,8 +1643,6 @@ footer {
 /* ═══════════════════════════════════════════════════
    MODAL — Calendário de Disponibilidade
    ═══════════════════════════════════════════════════ */
-
-/* Overlay */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -1740,10 +1663,8 @@ footer {
   pointer-events: all;
 }
 
-/* Caixa do modal */
 .modal-box {
   background: var(--fg);
-  /* fundo escuro como na imagem de referência */
   border-radius: var(--radius-lg);
   width: 100%;
   max-width: 860px;
@@ -1765,7 +1686,6 @@ footer {
   transform: translateY(0) scale(1);
 }
 
-/* Botão fechar */
 .modal-close {
   position: absolute;
   top: 18px;
@@ -1788,7 +1708,6 @@ footer {
   color: #fff;
 }
 
-/* Cabeçalho do modal */
 .modal-header {
   margin-bottom: 32px;
   text-align: center;
@@ -1805,7 +1724,6 @@ footer {
   font-weight: 500;
 }
 
-/* Loading */
 .cal-loading {
   display: flex;
   flex-direction: column;
@@ -1831,7 +1749,6 @@ footer {
   }
 }
 
-/* Error */
 .cal-error {
   display: flex;
   flex-direction: column;
@@ -1857,7 +1774,6 @@ footer {
   background: rgba(255, 255, 255, .06);
 }
 
-/* Navegação de meses */
 .cal-nav {
   display: flex;
   align-items: flex-start;
@@ -1898,9 +1814,6 @@ footer {
   gap: 0 40px;
 }
 
-/* Mês individual */
-.cal-month {}
-
 .cal-month-title {
   text-align: center;
   font-family: 'Fraunces', serif;
@@ -1910,7 +1823,6 @@ footer {
   margin-bottom: 16px;
 }
 
-/* Grid de dias */
 .cal-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -1939,11 +1851,6 @@ footer {
   user-select: none;
 }
 
-.cal-day:empty {
-  /* dias do mês anterior/próximo */
-}
-
-/* Estados */
 .cal-day--passado {
   color: rgba(255, 255, 255, .2);
   cursor: default;
@@ -2007,13 +1914,11 @@ footer {
   border-radius: 0;
 }
 
-/* faixa de range bloqueada no meio */
 .cal-day--range-blocked {
   background: rgba(184, 146, 46, .08);
   color: rgba(255, 255, 255, .25);
 }
 
-/* Barra de seleção inferior */
 .cal-bar {
   display: flex;
   align-items: center;
@@ -2081,7 +1986,6 @@ footer {
   }
 }
 
-/* Contador de hóspedes */
 .cal-bar-field--hospedes {
   justify-content: flex-start;
   flex: 0 0 auto;
@@ -2128,7 +2032,6 @@ footer {
   cursor: default;
 }
 
-/* Limpar */
 .cal-bar-clear {
   flex-shrink: 0;
   display: flex;
@@ -2150,7 +2053,6 @@ footer {
   color: rgba(255, 255, 255, .8);
 }
 
-/* Legenda */
 .cal-legend {
   display: flex;
   align-items: center;
@@ -2189,7 +2091,6 @@ footer {
   background: transparent;
 }
 
-/* Dica de interação */
 .cal-hint {
   display: flex;
   align-items: center;
@@ -2206,7 +2107,6 @@ footer {
   color: var(--gold);
 }
 
-/* Modal footer (botão WhatsApp) */
 .modal-footer {
   margin-top: 24px;
   display: flex;
@@ -2226,7 +2126,6 @@ footer {
   max-width: none;
 }
 
-/* Mobile */
 @media (max-width: 640px) {
   .modal-box {
     padding: 28px 20px 24px;
@@ -2251,7 +2150,6 @@ footer {
   }
 }
 
-
 /* ----- FAB WhatsApp ----- */
 .fab-whats {
   position: fixed;
@@ -2275,39 +2173,13 @@ footer {
   box-shadow: 0 10px 32px rgba(31, 174, 86, .55);
 }
 
-/* ----- Responsive helpers ----- */
-@media (prefers-reduced-motion: reduce) {
-
-  *,
-  *::before,
-  *::after {
-    animation-duration: .01ms !important;
-    transition-duration: .01ms !important;
-  }
-}
-
-/* Small screens */
 /* =========================================
    RESPONSIVIDADE TOTAL (TABLETS E CELULARES)
    ========================================= */
 
-/* Estágio 1: Tablets em modo retrato (até 900px) */
-@media (max-width: 900px) {
-
-  /* Transforma a tabela de preços em uma lista vertical */
-  .precos-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .preco-item {
-    border-right: none;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .preco-item:last-child {
-    border-bottom: none;
-  }
-
+/* Estágio 1: Tablets e Desktops pequenos (até 1023px) */
+/* Neste ponto, os chalés, história e serviços ficam empilhados elegantemente */
+@media (max-width: 1023px) {
   /* Evita que as imagens da história fiquem espremidas ao lado do texto */
   .historia-images {
     grid-template-columns: 1fr;
@@ -2323,18 +2195,24 @@ footer {
   }
 }
 
-/* Estágio 2: Celulares grandes / Tablets pequenos (até 768px) */
-/* Estágio 2: Celulares grandes / Tablets pequenos (até 768px) */
+/* Estágio 1.5: Adaptação das tabelas de preços */
 @media (max-width: 768px) {
+  .precos-grid {
+    grid-template-columns: 1fr 1fr;
+  }
 
-  /* Unifica o layout em coluna única e alinha à esquerda para leitura fluida */
+  .preco-item:nth-child(3) {
+    grid-column: 1 / -1;
+    border-right: none;
+    border-top: 1px solid var(--border);
+  }
+  
   .footer-inner {
     grid-template-columns: 1fr;
     gap: 2.5rem;
     text-align: left;
   }
 
-  /* Restaura o alinhamento nativo para contatos e ícones */
   .footer-contato p {
     justify-content: flex-start;
   }
@@ -2343,7 +2221,6 @@ footer {
     justify-content: flex-start;
   }
 
-  /* Empilha os botões de reserva para facilitar o toque (Touch Target) */
   .reservas-links {
     grid-template-columns: 1fr;
     gap: 10px;
@@ -2354,20 +2231,30 @@ footer {
     justify-content: center;
   }
 
-  /* Empilha os direitos autorais e cria uma margem para o botão do WhatsApp */
   .footer-bottom {
     flex-direction: column;
     text-align: center;
     gap: 12px;
     padding-bottom: 5.5rem;
-    /* Respiro essencial para não ocultar a assinatura HR | DEV sob o ícone flutuante */
   }
 }
 
-/* Estágio 3: Celulares padrão (até 640px) */
+/* Estágio 2: Celulares padrão (até 640px) */
 @media (max-width: 640px) {
+  /* Tabela de preços vira lista */
+  .precos-grid {
+    grid-template-columns: 1fr;
+  }
 
-  /* Alinha a barra de destaques (ícones) em uma única coluna fluida */
+  .preco-item {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .preco-item:last-child {
+    border-bottom: none;
+  }
+
   .highlights-list {
     grid-template-columns: 1fr;
   }
@@ -2381,7 +2268,6 @@ footer {
     border-bottom: none;
   }
 
-  /* Força todas as sub-galerias a ocuparem 100% da largura */
   .ext-photos,
   .servicos-photos,
   .depoimento-photos {
@@ -2389,15 +2275,12 @@ footer {
   }
 }
 
-/* Estágio 4: Celulares pequenos (até 480px) */
+/* Estágio 3: Celulares pequenos (até 480px) */
 @media (max-width: 480px) {
-
-  /* Reduz os respiros exagerados (whitespace) em telas pequenas */
   .section {
     padding: 56px 0;
   }
 
-  /* Adequa a tipografia do Hero */
   .hero-title {
     font-size: 2.6rem;
   }
@@ -2406,20 +2289,10 @@ footer {
     padding-top: 50px;
   }
 
-  /* Ajusta os cards dos chalés para telas muito estreitas */
-  .chale-info {
-    padding: 24px 20px;
-  }
-
-  .chale-photo-wrap {
-    height: 18rem;
-  }
-
   .comodidades {
     grid-template-columns: 1fr;
   }
 
-  /* Refina as alturas dinâmicas das imagens para não tomarem 2 telas de scroll */
   .hist-img-main img {
     height: 20rem;
   }
@@ -2444,26 +2317,15 @@ footer {
     height: 12rem;
   }
 
-  /* Melhora o layout de blocos de pagamento (Pix/Dinheiro) */
   .pagamento-item {
     flex-direction: column;
     gap: 12px;
   }
 }
 
-
-
-
 /* ============================================================
-   ANIMAÇÕES & SCROLL SUAVE — Recanto do Sol
+   ANIMAÇÕES & SCROLL SUAVE
    ============================================================ */
-
-/* ----- Scroll suave nativo reforçado ----- */
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 72px;
-  /* compensa o nav sticky */
-}
 
 /* ----- Tokens de animação ----- */
 :root {
@@ -2474,134 +2336,56 @@ html {
   --dur-slow: .8s;
 }
 
-/* ── Animações @keyframes ───────────────────────────────────── */
 @keyframes fade-up {
-  from {
-    opacity: 0;
-    transform: translateY(32px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(32px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes fade-in {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 @keyframes fade-left {
-  from {
-    opacity: 0;
-    transform: translateX(-40px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  from { opacity: 0; transform: translateX(-40px); }
+  to { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes fade-right {
-  from {
-    opacity: 0;
-    transform: translateX(40px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  from { opacity: 0; transform: translateX(40px); }
+  to { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes scale-in {
-  from {
-    opacity: 0;
-    transform: scale(.92);
-  }
-
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+  from { opacity: 0; transform: scale(.92); }
+  to { opacity: 1; transform: scale(1); }
 }
 
 @keyframes slide-down {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-/* ── Hero: animação de entrada automática ───────────────────── */
-.hero-eyebrow {
-  animation: fade-up var(--dur-normal) var(--ease-out-expo) .1s both;
-}
+.hero-eyebrow { animation: fade-up var(--dur-normal) var(--ease-out-expo) .1s both; }
+.hero-title { animation: fade-up var(--dur-slow) var(--ease-out-expo) .25s both; }
+.hero-subtitle { animation: fade-up var(--dur-slow) var(--ease-out-expo) .4s both; }
+.hero-actions { animation: fade-up var(--dur-normal) var(--ease-out-expo) .55s both; }
+.hero-scroll { animation: fade-in var(--dur-slow) ease 1.2s both; }
+.highlights-bar { animation: slide-down var(--dur-normal) var(--ease-out-expo) .7s both; }
 
-.hero-title {
-  animation: fade-up var(--dur-slow) var(--ease-out-expo) .25s both;
-}
-
-.hero-subtitle {
-  animation: fade-up var(--dur-slow) var(--ease-out-expo) .4s both;
-}
-
-.hero-actions {
-  animation: fade-up var(--dur-normal) var(--ease-out-expo) .55s both;
-}
-
-.hero-scroll {
-  animation: fade-in var(--dur-slow) ease 1.2s both;
-}
-
-.highlights-bar {
-  animation: slide-down var(--dur-normal) var(--ease-out-expo) .7s both;
-}
-
-/* ── Utilitários de reveal (controlados pelo JS/IntersectionObserver) ── */
-
-/* Estado inicial: invisível, pronto para animar */
 [data-reveal] {
   opacity: 0;
   will-change: opacity, transform;
 }
 
-[data-reveal="up"] {
-  transform: translateY(36px);
-}
+[data-reveal="up"] { transform: translateY(36px); }
+[data-reveal="left"] { transform: translateX(-40px); }
+[data-reveal="right"] { transform: translateX(40px); }
+[data-reveal="scale"] { transform: scale(.94); }
+[data-reveal="fade"] { transform: none; }
 
-[data-reveal="left"] {
-  transform: translateX(-40px);
-}
-
-[data-reveal="right"] {
-  transform: translateX(40px);
-}
-
-[data-reveal="scale"] {
-  transform: scale(.94);
-}
-
-[data-reveal="fade"] {
-  transform: none;
-}
-
-/* Estado visível — adicionado pela classe .revealed */
 [data-reveal].revealed {
   animation: none;
-  /* evita conflito com keyframes nominais */
   opacity: 1;
   transform: none;
   transition:
@@ -2609,104 +2393,37 @@ html {
     transform var(--dur-normal) var(--ease-out-expo);
 }
 
-/* Delay escalonado para grupos de elementos (stagger) */
-[data-reveal][data-delay="1"] {
-  transition-delay: .08s;
-}
+[data-reveal][data-delay="1"] { transition-delay: .08s; }
+[data-reveal][data-delay="2"] { transition-delay: .16s; }
+[data-reveal][data-delay="3"] { transition-delay: .24s; }
+[data-reveal][data-delay="4"] { transition-delay: .32s; }
+[data-reveal][data-delay="5"] { transition-delay: .40s; }
+[data-reveal][data-delay="6"] { transition-delay: .48s; }
 
-[data-reveal][data-delay="2"] {
-  transition-delay: .16s;
-}
+.nav-bar { animation: slide-down var(--dur-normal) var(--ease-out-expo) both; }
 
-[data-reveal][data-delay="3"] {
-  transition-delay: .24s;
-}
+.chale-thumb img { transition: transform .4s var(--ease-out-expo); }
+.chale-thumb:hover img { transform: scale(1.08); }
 
-[data-reveal][data-delay="4"] {
-  transition-delay: .32s;
-}
+.chale-main-img { transition: opacity .3s ease, transform .5s var(--ease-out-expo); }
+.chale-main-img.is-switching { opacity: 0; transform: scale(1.03); }
 
-[data-reveal][data-delay="5"] {
-  transition-delay: .40s;
-}
+.servico-card { transition: transform var(--transition), box-shadow var(--transition); }
+.servico-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
 
-[data-reveal][data-delay="6"] {
-  transition-delay: .48s;
-}
+.depoimento-card { transition: transform var(--transition), box-shadow var(--transition); }
+.depoimento-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
 
-/* ── Nav: transição de entrada ao carregar ─────────────────── */
-.nav-bar {
-  animation: slide-down var(--dur-normal) var(--ease-out-expo) both;
-}
-
-/* ── Chalé card: efeito nos botões de thumb ────────────────── */
-.chale-thumb img {
-  transition: transform .4s var(--ease-out-expo);
-}
-
-.chale-thumb:hover img {
-  transform: scale(1.08);
-}
-
-/* ── Imagem principal do chalé: transição suave ao trocar foto ── */
-.chale-main-img {
-  transition: opacity .3s ease, transform .5s var(--ease-out-expo);
-}
-
-.chale-main-img.is-switching {
-  opacity: 0;
-  transform: scale(1.03);
-}
-
-/* ── Serviço cards: hover lift ─────────────────────────────── */
-.servico-card {
-  transition:
-    transform var(--transition),
-    box-shadow var(--transition);
-}
-
-.servico-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
-}
-
-/* ── Depoimentos: hover suave ──────────────────────────────── */
-.depoimento-card {
-  transition: transform var(--transition), box-shadow var(--transition);
-}
-
-.depoimento-card:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-lg);
-}
-
-/* ── Highlights bar: ícones com pulse sutil ────────────────── */
 @keyframes icon-pulse {
-
-  0%,
-  100% {
-    transform: scale(1);
-  }
-
-  50% {
-    transform: scale(1.18);
-  }
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.18); }
 }
 
-.highlights-list li:hover svg {
-  animation: icon-pulse .5s var(--ease-out-back);
-}
+.highlights-list li:hover svg { animation: icon-pulse .5s var(--ease-out-back); }
 
-/* ── Ext-features: hover nos ícones da área externa ────────── */
-.ext-icon {
-  transition: transform var(--transition), background var(--transition);
-}
+.ext-icon { transition: transform var(--transition), background var(--transition); }
+.ext-features li:hover .ext-icon { transform: scale(1.12) rotate(-3deg); }
 
-.ext-features li:hover .ext-icon {
-  transform: scale(1.12) rotate(-3deg);
-}
-
-/* ── Botões: feedback visual aprimorado ────────────────────── */
 .btn {
   transition:
     transform var(--dur-fast) var(--ease-out-back),
@@ -2715,87 +2432,222 @@ html {
     background var(--transition);
 }
 
-.btn:active {
-  transform: scale(.97) translateY(1px) !important;
-}
+.btn:active { transform: scale(.97) translateY(1px) !important; }
 
-/* ── FAB WhatsApp: pulso de atenção ────────────────────────── */
 @keyframes fab-pulse {
-  0% {
-    box-shadow: 0 0 0 0 rgba(31, 174, 86, .5);
-  }
-
-  70% {
-    box-shadow: 0 0 0 16px rgba(31, 174, 86, 0);
-  }
-
-  100% {
-    box-shadow: 0 0 0 0 rgba(31, 174, 86, 0);
-  }
+  0% { box-shadow: 0 0 0 0 rgba(31, 174, 86, .5); }
+  70% { box-shadow: 0 0 0 16px rgba(31, 174, 86, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(31, 174, 86, 0); }
 }
 
-.fab-whats {
-  animation: fab-pulse 2.8s ease-out 3s infinite;
-}
+.fab-whats { animation: fab-pulse 2.8s ease-out 3s infinite; }
 
-/* ── Scroll indicator do hero: bounce ──────────────────────── */
-@keyframes scroll-bounce {
+img { transition: opacity .4s ease; }
+img.lazy-hidden { opacity: 0; }
+img.lazy-loaded { opacity: 1; }
 
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(6px);
-  }
-}
-
-.hero-scroll {
-  animation: fade-in 1s ease 1.2s both, scroll-bounce 1.8s ease 2s infinite;
-}
-
-.scroll-dot {
-  animation: scroll-bounce 1.8s ease 2s infinite;
-}
-
-/* ── Image lazy load: fade in ao carregar ──────────────────── */
-img {
-  transition: opacity .4s ease;
-}
-
-img.lazy-hidden {
-  opacity: 0;
-}
-
-img.lazy-loaded {
-  opacity: 1;
-}
-
-/* ── Seção historia: parallax leve nas imagens ─────────────── */
 .hist-img-main img,
 .hist-img-secondary img {
   transition: transform .6s var(--ease-out-expo);
   overflow: hidden;
 }
 
-/* ── Reduce motion: desativa animações para quem prefere ────── */
 @media (prefers-reduced-motion: reduce) {
-
-  *,
-  *::before,
-  *::after {
+  *, *::before, *::after {
     animation-duration: .01ms !important;
     transition-duration: .01ms !important;
   }
-
   [data-reveal] {
     opacity: 1 !important;
     transform: none !important;
   }
 }
 
-/* Força a ocultação de elementos com o atributo hidden */
-[hidden] {
-  display: none !important;
+[hidden] { display: none !important; }
+
+/* ================================================================
+   PATCH RESPONSIVO
+   ================================================================ */
+
+.chale-card,
+.chale-info,
+.historia-grid,
+.historia-text,
+.ext-grid,
+.ext-features,
+.reservas-grid,
+.servicos-grid,
+.footer-inner {
+  min-width: 0;
+}
+
+.chale-info,
+.historia-text {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* ── Chalé card: breakpoint para telas intermediárias largas (1024–1250px) ──────── */
+@media (min-width: 1024px) and (max-width: 1250px) {
+  .chale-info {
+    padding: 26px 22px;
+    gap: 16px;
+  }
+  .chale-chamada { font-size: 0.93rem; }
+  .chale-desc { font-size: 0.88rem; }
+  .precos-grid { grid-template-columns: 1fr 1fr; }
+  .preco-item:nth-child(3) {
+    grid-column: 1 / -1;
+    border-right: none;
+    border-top: 1px solid var(--border);
+  }
+  .preco-val { font-size: 1.1rem; }
+  .preco-label { font-size: 0.59rem; letter-spacing: .1em; }
+  .chale-superior { font-size: 0.85rem; padding: 12px 14px; }
+  .comodidades { font-size: 0.85rem; gap: 6px; }
+}
+
+@media (max-width: 1023px) {
+  .section { padding: clamp(48px, 6vw, 72px) 0; }
+  .depoimentos {
+    padding-top: clamp(48px, 6vw, 72px);
+    padding-bottom: 4.5rem;
+  }
+  .section-header { margin-bottom: 40px; }
+}
+
+@media (max-width: 768px) {
+  .hero { min-height: 92vh; }
+  .hero-content { padding-top: 90px; padding-bottom: 60px; }
+  .hero-subtitle { font-size: 1rem; margin-top: 14px; }
+  .hero-actions { gap: 10px; margin-top: 26px; }
+}
+
+@media (max-width: 560px) {
+  .hero { min-height: 90vh; }
+  .hero-content { padding-top: 80px; padding-bottom: 52px; }
+  .hero-title { font-size: clamp(2.4rem, 9vw, 3.4rem); max-width: 100%; }
+  .hero-subtitle { font-size: 0.95rem; max-width: 100%; }
+  .hero-actions .btn { padding: 0.75rem 1.4rem; font-size: 0.9rem; }
+}
+
+@media (max-width: 380px) {
+  .hero-actions { flex-direction: column; align-items: flex-start; }
+  .hero-actions .btn { width: 100%; justify-content: center; }
+}
+
+@media (min-width: 641px) and (max-width: 767px) {
+  .highlights-list { grid-template-columns: 1fr 1fr; }
+  .highlights-list li { border-bottom: 1px solid var(--border); }
+  .highlights-list li:nth-child(2n) { border-right: none; }
+  .highlights-list li:nth-last-child(-n+2) { border-bottom: none; }
+}
+
+@media (max-width: 1100px) {
+  .hist-img-main img { height: clamp(18rem, 30vw, 36rem); }
+}
+
+@media (max-width: 640px) {
+  .historia-grid { gap: 32px; }
+  .hist-img-main img { height: 18rem; }
+  .hist-img-secondary { flex-direction: row; gap: 10px; padding-top: 0; }
+  .hist-img-secondary img { height: 12rem !important; }
+  .section-header { margin-bottom: 32px; }
+  .section-sub { font-size: 0.93rem; }
+}
+
+@media (max-width: 640px) {
+  .chale-info h3 { font-size: 1.75rem; }
+}
+
+@media (max-width: 480px) {
+  .chale-info { padding: 22px 18px; gap: 16px; }
+  .chale-info h3 { font-size: 1.6rem; }
+  .chale-superior { font-size: 0.88rem; }
+}
+
+@media (max-width: 640px) {
+  .ext-photo-main { height: 18rem; }
+  .ext-photo-sec { height: 11rem; }
+  .ext-features li { padding: 16px 0; gap: 16px; }
+  .ext-features h3 { font-size: 0.95rem; }
+  .ext-features p { font-size: 0.85rem; }
+}
+
+@media (max-width: 420px) {
+  .ext-photos { grid-template-columns: 1fr; }
+  .ext-photo-sec { height: 14rem; }
+  .ext-photo-main { height: 16rem; }
+}
+
+@media (max-width: 640px) {
+  .servicos-header { grid-template-columns: 1fr; gap: 20px; margin-bottom: 32px; }
+  .servicos-photos { grid-template-columns: 1fr 1fr; }
+  .servicos-photos img { height: 9rem; }
+}
+
+@media (max-width: 480px) {
+  .servicos-photos { grid-template-columns: 1fr; }
+  .servicos-photos img { height: 12rem; width: 100%; }
+}
+
+@media (max-width: 480px) {
+  .depoimento-card { padding: 1.5rem 1.25rem; }
+  .depoimento-card p { font-size: 0.88rem; }
+}
+
+@media (max-width: 640px) {
+  .reservas-cta { padding: 28px 22px; }
+  .reservas-cta h3 { font-size: 1.5rem; }
+  .checkin-info { flex-wrap: wrap; }
+  .pagamentos { gap: 12px; }
+}
+
+@media (max-width: 500px) {
+  .modal-overlay { padding: 0; align-items: flex-end; }
+  .modal-box {
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    padding: 28px 16px 20px;
+    max-height: 95vh;
+    width: 100%;
+    max-width: 100%;
+  }
+  .modal-header h3 { font-size: 1.6rem; }
+  .modal-close { top: 14px; right: 14px; }
+  .cal-day { font-size: 0.75rem; }
+  .cal-weekday { font-size: 0.6rem; }
+}
+
+@media (max-width: 380px) {
+  .nav-brand-text span { font-size: 14px; }
+  .nav-brand-img { height: 34px; }
+  .nav-inner { gap: 12px; }
+}
+
+@media (max-width: 480px) {
+  .footer-inner { padding: 3.5rem 1rem 2rem; gap: 2rem; }
+  .footer-bottom { padding: 1.25rem 1rem; padding-bottom: 5.5rem; }
+  .footer-brand img { width: 130px; height: 80px; }
+  .footer-brand p { font-size: 0.82rem; }
+}
+
+@supports (padding: env(safe-area-inset-bottom)) {
+  .fab-whats {
+    right: max(20px, env(safe-area-inset-right, 20px));
+    bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+  }
+  .mobile-menu.open { padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px)); }
+  @media (max-width: 768px) {
+    .footer-bottom { padding-bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px)); }
+  }
+}
+
+@media print {
+  .nav-bar,
+  .fab-whats,
+  .modal-overlay,
+  .nav-toggle,
+  .mobile-menu,
+  .hero-scroll { display: none !important; }
+  .section { padding: 40px 0 !important; }
 }
